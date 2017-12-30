@@ -1,0 +1,38 @@
+.nav-bar {
+  height: 100%;
+  &-li {
+    display: inline-block;
+    padding: 0 15px;
+    line-height: 40px;
+    float: left;
+    &-link {
+      color: #008CD7;
+      text-decoration: none;
+      font-size: 0.9em;
+      font-weight: bolder;
+    }
+    &-childUl {
+      position: absolute;
+      background: #005AB5;
+      display: none;
+      &-li {
+        padding: 0 10px;
+        border-bottom: 1px solid #ccc;
+        &:hover {
+          background: #008CD7;
+        }
+        &-link {
+          display: block;
+          color: white;
+          text-decoration: none;
+          font-size: 0.9em;
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+}
+
+li:hover ul{
+  display: block;
+}

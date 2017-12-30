@@ -8,8 +8,8 @@ const App = () => {
   return (
     <div style={{minHeight: '100%'}}>
       <Switch>
-        <Route path='/admin' component={AdminRouter}/>
-        <Route path='/' component={AppRouter}/>
+        <Route path='/admin' component={AdminRouter} />
+        <Route path='/' component={AppRouter} />
       </Switch>
     </div>
   )

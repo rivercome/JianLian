@@ -4,6 +4,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './index.less'
+import Carousel from '../../components/Common/Carousel'
+import NavBar from '../../components/Common/NavBar'
 // import { newDate } from '../../utils/dateAbout'
 
 class AppLayout extends Component {
@@ -12,13 +14,14 @@ class AppLayout extends Component {
     this.state = {
       searchContent: '',
       // timeNow: -5,
-      activeIndex: 0
+      /* activeIndex: 0, */
+      images: ['/images/img1.jpg', '/images/img2.jpg', '/images/img3.jpg']
     }
     this.handleSearchChange = this.handleSearchChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.position = this.position.bind(this)
-    this.playRight = this.playRight.bind(this)
-    this.autoPlay = this.autoPlay.bind(this)
+    /* this.position = this.position.bind(this) */
+    /* this.playRight = this.playRight.bind(this)
+    this.autoPlay = this.autoPlay.bind(this) */
   }
 
   componentWillMount () {
@@ -32,14 +35,14 @@ class AppLayout extends Component {
     //     timeNow: this.state.timeNow + 10
     //   })
     // }, 5000)
-    this.autoPlay()
+    /* this.autoPlay() */
   }
 
-  autoPlay () {
-    const timeOuter = setInterval(this.playRight, 5000)
-  }
+  /* autoPlay () {
+    setInterval(this.playRight, 5000)
+  } */
 
-  playRight () {
+  /* playRight () {
     let index = this.state.activeIndex + 1
     console.log(index)
     if (index > 2) {
@@ -48,9 +51,9 @@ class AppLayout extends Component {
     this.setState({
       activeIndex: index
     })
-  }
+  } */
 
-  position () {
+  /* position () {
     switch (this.state.activeIndex) {
       case 0:
         return 'app-header-bgImg-test1'
@@ -59,7 +62,7 @@ class AppLayout extends Component {
       case 2:
         return 'app-header-bgImg-test3'
     }
-  }
+  } */
 
   handleSearchChange (e) {
     this.setState({
@@ -77,7 +80,7 @@ class AppLayout extends Component {
       {
         content: '协会概况',
         link: '/StaticPage',
-        secondNav: [
+        children: [
           {content: '协会介绍', link: '#'},
           {content: '协会章程', link: '#'}
         ]
@@ -88,7 +91,7 @@ class AppLayout extends Component {
       {
         content: '创优争先',
         link: '/StaticPage',
-        secondNav: [
+        children: [
           {content: '国家级奖项', link: '#'},
           {content: '秦皇岛市级奖项', link: '#'},
           {content: '管理规定', link: '#'}
@@ -100,10 +103,14 @@ class AppLayout extends Component {
       <div className='app'>
         <div className='app-header'>
           <div className='app-header-bgImg'>
-            <div className={this.position()}/>
+            {/* <div className={this.position()} /> */}
+            <Carousel images={this.state.images} time={10000} />
           </div>
           <div className='app-header-nav'>
-            <ul className='app-header-nav-list'>
+            <div className='app-header-nav-list'>
+              <NavBar navDatas={navDatas} />
+            </div>
+            {/* <ul className='app-header-nav-list'>
               {navDatas.map((nav, i) => {
                 if (!nav.secondNav) {
                   return (
@@ -132,9 +139,9 @@ class AppLayout extends Component {
                   )
                 }
               })}
-            </ul>
+            </ul> */}
             <div className='app-header-nav-search'>
-              <input className='app-header-nav-search-input' type='text' onChange={this.handleSearchChange}/>
+              <input className='app-header-nav-search-input' type='text' onChange={this.handleSearchChange} />
               <div className='app-header-nav-search-font'>
                 <a className='nav-font' onClick={this.handleSubmit}>
                   搜索
