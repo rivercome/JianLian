@@ -1,3 +1,4 @@
 export default {
-  demo: '/demo'
+  demo: '/demo',
+  basePath: 'http://192.168.1.17:3000'
 }

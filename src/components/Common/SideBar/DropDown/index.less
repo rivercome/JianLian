@@ -1,0 +1,49 @@
+@import "../../../../style/common";
+.side-bar-list {
+  height: 60px;
+  width: 100%;
+  line-height: 60px;
+  text-align: center;
+  color: @ONE_BORDER_COLOR;
+  font-size: 1.1em;
+  cursor: pointer;
+  &:hover {
+    background: @BLUE;
+    color: @ONE_BORDER_COLOR;
+  }
+  &-child {
+    transition: height ease 0.5s;
+    overflow: hidden;
+    &-list {
+      height: 50px;
+      line-height: 50px;
+      background: @ONE_FONT_COLOR;
+      cursor: pointer;
+      color: @ONE_BORDER_COLOR;
+      text-align: center;
+      &-text {
+        color: @ONE_BORDER_COLOR;
+        float: left;
+        width: 150px;
+      }
+      &:hover &-child {
+        display: block;
+      }
+      &-child {
+        position: absolute;
+        left: 150px;
+        z-index: 10000;
+        width: 100px;
+        background: rgba(0,20,43, 0.65);
+        display: none;
+        &-link:hover {
+          background: @BLUE;
+        }
+      }
+      &:hover {
+        background: @BLUE;
+        color: @ONE_BORDER_COLOR;
+      }
+    }
+  }
+}

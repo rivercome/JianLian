@@ -1,0 +1,121 @@
+@import "../../../style/common";
+.introduce-content {
+  width: 100%;
+  height: 100%;
+  &-title {
+    font-size: 1.4em;
+    &-1 {
+      color: @BLUE;
+    }
+    &-2 {
+      color: @DANGER;
+    }
+  }
+  &-container {
+    width: 90%;
+    margin: 20px auto 0 auto;
+    min-width: 1000px;
+    height: 800px;
+    border: 1px solid #ccc;
+    overflow: auto;
+    &-top {
+      height: 150px;
+      width: 100%;
+      line-height: 100px;
+      position: relative;
+      &-carousel {
+        width: 80%;
+        min-width: 800px;
+        background: #ccc;
+        margin: 0 auto;
+        height: 100%;
+        text-align: center;
+        background: @DANGER;
+      }
+      &-navbar {
+        margin: -50px auto 0 auto;
+        height: 30px;
+        line-height: 30px;
+        width: 70%;
+        min-width: 640px;
+        text-align: center;
+        background: @INFO;
+      }
+    }
+    &-main {
+      margin: 10px auto 0 auto;
+      width: 600px;
+      background: #ccc;
+      &-box {
+        height: 100%;
+        background: @TWO_BORDER_COLOR;
+        float: left;
+      }
+      &-1 {
+        height: 150px;
+        line-height: 150px;
+        text-align: center;
+        &-carousel {
+          width: 220px;
+          margin-right: 10px;
+          background: @DANGER;
+        }
+        &-article {
+          width: 220px;
+          margin-right: 10px;
+          background: @SUCCESS;
+        }
+        &-img {
+          width: 140px;
+        }
+      }
+      &-2 {
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        margin-top: 10px;
+        &-img {
+          width: 450px;
+          margin-right: 10px;
+        }
+        &-box {
+          width: 140px;
+        }
+      }
+      &-3 {
+        height: 150px;
+        line-height: 150px;
+        text-align: center;
+        margin-top: 10px;
+        &-article {
+          width: 220px;
+          margin-right: 10px;
+          background: @SUCCESS;
+        }
+        &-articleend {
+          width: 140px;
+          background: @SUCCESS;
+        }
+        &-carousel {
+          width: 140px;
+          background: @DANGER;
+        }
+      }
+      &-4 {
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        margin-top: 10px;
+        background: @DANGER;
+      }
+      &-footer {
+        height: 50px;
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+        line-height: 50px;
+        background: @FOUR_BORDER_COLOR;
+      }
+    }
+  }
+}
