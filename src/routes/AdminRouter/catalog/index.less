@@ -1,0 +1,24 @@
+@import "../../../style/common";
+.admin-catalog {
+  width: 100%;
+  height: 100%;
+  &-cardbox {
+    min-height: 300px;
+    margin-top: 20px;
+    &-add {
+      height: 210px;
+      width: 210px;
+      text-align: center;
+      display: table-cell;
+      vertical-align: middle;
+      cursor: pointer;
+      &-icon {
+        font-size: 5em;
+        color: #ccc;
+        &:hover {
+          color: @SUCCESS;
+        }
+      }
+    }
+  }
+}

@@ -27,7 +27,7 @@ export default class ArticleView extends React.Component {
         render: (text, record) => {
           return (
             <span>
-              <a href={`/admin/article/edit?id=${text.key}&title=${text.title}&catalog=${text.classId}`}>编辑</a>
+              <a href={`/admin/article/edit?id=${text.key}&title=${text.title}&catalog=${text.classId}&type=edit&parentClassId=${querystring.parse(this.props.location.search).parentClassId}`}>编辑</a>
               <Divider type='vertical' />
               <a onClick={this.removeArticle.bind(this, text.key)}>删除</a>
             </span>
@@ -53,13 +53,14 @@ export default class ArticleView extends React.Component {
   }
 
   removeArticle (id) {
-    axios.get(`${basePath}/picture/delete/${id}`)
+    console.log(id)
+    axios.get(`${basePath}/article/delete/${id}`)
       .then(res => {
         if (res.data.code === 1000) {
           message.success('删除成功')
           this.getArtical(querystring.parse(this.props.location.search).classId, this.state.pagination.current)
         } else if (res.data.code === 2002) {
-          message.error('删除失败')
+          message.error('删除失败, 文章不存在')
         } else {
           message.error('发生未知错误')
         }
@@ -95,13 +96,14 @@ export default class ArticleView extends React.Component {
   }
 
   titleData () {
+    let query = querystring.parse(this.props.location.search)
     return (
       <Row gutter={16}>
         <Col span={12}>
-          {`${querystring.parse(this.props.location.search).parentClassName} / ${querystring.parse(this.props.location.search).className}`}
+          {`${query.parentClassName} / ${query.className}`}
         </Col>
         <Col span={12} style={{textAlign: 'right'}}>
-          <Button type='primary' size='small'><Link to={`/admin/article/edit/?catalog=${querystring.parse(this.props.location.search).classId}`}>添加文章</Link></Button>
+          <Button type='primary' size='small'><Link to={`/admin/article/edit/?catalog=${query.classId}&type=add&parentClassId=${query.parentClassId}`}>添加文章</Link></Button>
         </Col>
       </Row>
     )

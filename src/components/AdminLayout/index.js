@@ -68,6 +68,16 @@ export default class AdminLayout extends React.Component {
           title: '文章列表',
           icon: 'icon-wenzhang',
           children: []
+        },
+        {
+          title: '目录编辑',
+          icon: 'icon-mulu',
+          children: [
+            {
+              title: '导航目录',
+              link: '/admin/catalog'
+            }
+          ]
         }
       ]
     }

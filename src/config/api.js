@@ -1,4 +1,4 @@
 export default {
   demo: '/demo',
-  basePath: 'http://192.168.1.17:3000'
+  basePath: 'http://build.sealbaby.cn' || 'http://192.168.1.17:3000'
 }

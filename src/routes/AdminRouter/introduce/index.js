@@ -7,7 +7,7 @@ class AdminHomePage extends Component {
     return (
       <div className='introduce-content'>
         <h1 className='introduce-content-title'>
-          <span className='introduce-content-title-1'>后台管理</span><span className='introduce-content-title-2'>入门及介绍</span>
+          <span className='introduce-content-title-1'>后台管理</span><span className='introduce-content-title-2'>介绍</span>
         </h1>
         <div className='introduce-content-container'>
           <div className='introduce-content-container-top'>
@@ -15,7 +15,7 @@ class AdminHomePage extends Component {
               <Link to='/admin/carousel'>轮播图1</Link>
             </div>
             <div className='introduce-content-container-top-navbar'>
-              导航栏1
+              <Link to='/admin/catalog' className='introduce-content-container-top-navbar-bar'>导航栏1</Link>
             </div>
           </div>
           <div className='introduce-content-container-main'>
@@ -24,7 +24,7 @@ class AdminHomePage extends Component {
                 <Link to='/admin/carousel'>轮播图2</Link>
               </div>
               <div className='introduce-content-container-main-1-article introduce-content-container-main-box'>
-                <Link to='/admin/article/view/1'>文章列表1</Link>
+                文章列表1
               </div>
               <div className='introduce-content-container-main-1-img introduce-content-container-main-box'>
                 图片导航1
@@ -40,13 +40,13 @@ class AdminHomePage extends Component {
             </div>
             <div className='introduce-content-container-main-3'>
               <div className='introduce-content-container-main-3-article introduce-content-container-main-box'>
-                <Link to='/admin/article/view/2'>文章列表2</Link>
+                文章列表2
               </div>
               <div className='introduce-content-container-main-3-article introduce-content-container-main-box'>
-                <Link to='/admin/article/view/3'>文章列表3</Link>
+                文章列表3
               </div>
               <div className='introduce-content-container-main-3-articleend introduce-content-container-main-box'>
-                <Link to='/admin/article/view/4'>文章列表4</Link>
+                文章列表4
               </div>
             </div>
             <div className='introduce-content-container-main-4'>
@@ -54,10 +54,10 @@ class AdminHomePage extends Component {
             </div>
             <div className='introduce-content-container-main-3'>
               <div className='introduce-content-container-main-3-article introduce-content-container-main-box'>
-                <Link to='/admin/article/view/5'>文章列表5</Link>
+                文章列表5
               </div>
               <div className='introduce-content-container-main-3-article introduce-content-container-main-box'>
-                <Link to='/admin/article/view/6'>文章列表6</Link>
+                文章列表6
               </div>
               <div className='introduce-content-container-main-3-carousel introduce-content-container-main-box'>
                 <Link to='/admin/carousel'>轮播图4</Link>

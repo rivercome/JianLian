@@ -18,9 +18,29 @@ class ArticleEdit extends React.Component {
       html: null,
       tokenData: {
         token: null
-      }
+      },
+      articleData: {}
     }
   }
+
+  componentDidMount () {
+    if (querystring.parse(this.props.location.search).type === 'edit') {
+      this.getArticleContent()
+    }
+  }
+
+  getArticleContent () {
+    axios.get(`${basePath}/article/${querystring.parse(this.props.location.search).id}`)
+      .then(res => {
+        if (res.data.code === 1000) {
+          this.setState({articleData: res.data.data})
+          this.editorInstance.setContent(JSON.parse(res.data.data.article_real_content))
+        } else if (res.data.code === 2002) {
+          message.error('文章不存在')
+        }
+      })
+  }
+
   handleChange = (content) => {
     this.setState({content})
   }
@@ -86,26 +106,48 @@ class ArticleEdit extends React.Component {
       } else {
         try {
           if (querystring.parse(this.props.location.search).catalog === '' || !querystring.parse(this.props.location.search).catalog) {
+            message.error('没有父级目录')
             throw new Error('no catalog')
           }
           let articleRealContent = JSON.stringify(this.state.content)
-          axios.post(`${basePath}/article/add`, {
-            article_title: values.title,
-            article_real_content: articleRealContent,
-            article_rendered_content: this.state.html,
-            article_catalog: querystring.parse(this.props.location.search).catalog
-          }).then(res => {
-            if (res.data.code === 1000) {
-              this.props.history.go(-1)
-              message.success('添加成功')
-            } else if (res.data.code === 1001) {
-              message.error('表单上传失败')
-            } else {
-              message.error('发生未知错误')
-            }
-          }).catch((err) => {
-            console.log(err)
-          })
+          if (querystring.parse(this.props.location.search).type === 'add') {
+            axios.post(`${basePath}/article/add`, {
+              article_title: values.title,
+              article_real_content: articleRealContent,
+              article_rendered_content: this.state.html,
+              article_catalog: querystring.parse(this.props.location.search).catalog,
+              article_first_catalog: querystring.parse(this.props.location.search).parentClassId
+            }).then(res => {
+              if (res.data.code === 1000) {
+                this.props.history.go(-1)
+                message.success('添加成功')
+              } else if (res.data.code === 1001) {
+                message.error('表单上传失败')
+              } else {
+                message.error('发生未知错误')
+              }
+            }).catch((err) => {
+              console.log(err)
+            })
+          } else {
+            let query = querystring.parse(this.props.location.search)
+            axios.post(`${basePath}/article/update`, {
+              article_id: query.id,
+              article_title: values.title,
+              article_real_content: articleRealContent,
+              article_rendered_content: this.state.html,
+              article_catalog: query.catalog,
+              article_first_catalog: querystring.parse(this.props.location.search).parentClassId
+            }).then(res => {
+              if (res.data.code === 1000) {
+                message.success('修改成功')
+              } else if (res.data.code === 1001) {
+                message.error('表单验证出错')
+              }
+            }).catch(err => {
+              message.error(err.message)
+            })
+          }
         } catch (error) {
           message.error('表单验证发生错误')
         }
@@ -148,12 +190,12 @@ class ArticleEdit extends React.Component {
                 htmlType='submit'
                 size='small'
               >
-                上传文章
+                {querystring.parse(this.props.location.search).type === 'add' ? '上传文章' : '提交修改'}
               </Button>
             </FormItem>
           </Form>
           <h2 className='article-edit-h2'>文章内容</h2>
-          <BraftEditor {...editorProps} />
+          <BraftEditor ref={instance => this.editorInstance = instance} {...editorProps} />
         </Card>
       </div>
     )

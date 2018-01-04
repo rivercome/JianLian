@@ -12,6 +12,10 @@ const AdminArticlePage = asyncComponent({
   resolve: () => System.import('./article')
 })
 
+const AdminCatalogPage = asyncComponent({
+  resolve: () => System.import('./catalog')
+})
+
 const AdminRouter = () => {
   return (
     <AdminLayout>
@@ -19,6 +23,7 @@ const AdminRouter = () => {
         <Route exact path='/admin' component={AdminIntroducePage} />
         <Route exact path='/admin/carousel' component={AdminCarouselPage} />
         <Route path='/admin/article' component={AdminArticlePage} />
+        <Route path='/admin/catalog' component={AdminCatalogPage} />
       </Switch>
     </AdminLayout>
   )

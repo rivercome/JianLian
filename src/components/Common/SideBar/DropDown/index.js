@@ -32,7 +32,7 @@ export default class DropDown extends React.Component {
                         {list.children.map((child, i) => {
                           return (
                             <div className='side-bar-list-child-list-child-link' key={`${child.title}-${i}`}>
-                              <Link style={{color: '#ccc', display: 'block', width: '100%'}} to={child.link || '/'}>{child.title}</Link>
+                              <Link style={{color: '#ccc', display: 'block', width: '100%'}} to={child.link || '#'}>{child.title}</Link>
                             </div>
                           )
                         })}
@@ -42,7 +42,7 @@ export default class DropDown extends React.Component {
                 } else {
                   return (
                     <div key={`${list.title}-${index}`} className='side-bar-list-child-list'>
-                      <Link className='link' style={{width: '100%', display: 'block'}} to={list.link || '/'}>{list.title}</Link>
+                      <Link className='link' style={{width: '100%', display: 'block'}} to={list.link || '#'}>{list.title}</Link>
                     </div>
                   )
                 }
