@@ -1,73 +1,184 @@
 .app-home{
   width: 1000px;
   margin: 0 auto;
-  background-color: black;
   &-top{
     width: 100%;
     height: 240px;
+    margin: 5px 0;
     &-a{
       width: 380px;
       height: 100%;
+      padding: 3px;
+      border: 1px solid #777777;
       float: left;
-      background-color: beige;
       margin-right: 10px;
     }
     &-b{
       width: 385px;
-      height: 100%;
+      height: 237px;
       float: left;
-      background-color: bisque;
+      overflow: hidden;
+      border: 1px solid #777777;
       margin-right: 10px;
+      &-top{
+        height: 30px;
+        background-color: #37A8E4;
+        &-title{
+          height: 30px;
+          width: 150px;
+          float: left;
+          padding: 6px 13px;
+          font-size: 15px;
+          color: #ffffff;
+          &-link{
+            text-decoration: none;
+            color: #ffffff;
+          }
+          &-link:hover{
+            color: #ffffff;
+          }
+        }
+        &-more{
+          height: 30px;
+          width: 100px;
+          float: right;
+          padding: 6px 0 0 40px;
+          font-size: 15px;
+          color: #ffffff;
+        }
+      }
     }
     &-c{
       width: 215px;
       height: 100%;
+      overflow: hidden;
+      border: 1px solid #777777;
       float: left;
-      background-color: aquamarine;
+      &-content{
+        height: 208px;
+        &-img{
+          height: 70px;
+        }
+      }
     }
   }
   &-middle1{
     height: 87px;
+    margin: 5px 0;
     &-a{
       width: 775px;
       height: 100%;
-      background-color: burlywood;
+      border: 1px solid #777777;
+      padding: 3px;
       float: left;
+      overflow: hidden;
       margin-right: 10px;
     }
     &-b{
       width: 215px;
       height: 100%;
-      background-color: chocolate;
       float: left;
+      border: 1px solid #777777;
+      &-content{
+        width: 100%;
+        &-font{
+          width: 50%;
+          height: 60px;
+          float: left;
+          font-size: 15px;
+          color: #008CD7;
+          text-align: center;
+          padding: 20px 0;
+        }
+      }
     }
   }
   &-middle2{
+    width: 1000px;
     height: 243px;
+    margin: 5px 0;
     &-a{
       width: 380px;
       height: 100%;
       float: left;
-      background-color: beige;
-      margin-right: 10px;
-    }
-    &-b{
-      width: 385px;
-      height: 100%;
-      float: left;
-      background-color: bisque;
       margin-right: 10px;
     }
     &-c{
       width: 215px;
       height: 100%;
       float: left;
-      background-color: aquamarine;
+      border: 1px solid #777777;
+      overflow: hidden;
+      &-content{
+        width: 100%;
+        height: 213px;
+        &-arrow{
+          width: 49px;
+          height: 150px;
+          float: left;
+          cursor: pointer;
+          padding-top: 65px;
+          text-align: center;
+        }
+        &-center{
+          width: 115px;
+          height: 130px;
+          margin: 10px 0;
+          float: left;
+        }
+        &-list{
+          width: 100%;
+          height: 60px;
+          margin-top: 30px;
+          clear: left;
+          background-color: black;
+        }
+      }
     }
   }
   &-middle3{
     width: 1000px;
     height: 187px;
-    background-color: burlywood;
+    border: 1px solid #777777;
+    margin: 5px 0;
+    &-content{
+      height: 157px;
+      &-item{
+        width: 104px;
+        height: 133px;
+        padding: 3px;
+        margin:11px 10px;
+        border: 1px solid #777777;
+        float: left;
+      }
+    }
+  }
+}
+
+.title-right{
+  height: 30px;
+  padding: 5px 13px;
+  font-size: 15px;
+  color: #ffffff;
+  background-color: #37A8E4;
+}
+
+.app-home-middle-none{
+  width: 380px;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  border: 1px solid #777777;
+  margin-right: 12px;
+  &-title{
+    width: 100%;
+    height: 30px;
+    background-color: #37A8E4;
+  }
+  &-content{
+    padding: 100px 0;
+    color: #008CD7;
+    font-weight: bold;
+    text-align: center;
   }
 }

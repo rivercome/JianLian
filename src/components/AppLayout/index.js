@@ -4,8 +4,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './index.less'
-import Carousel from '../../components/Common/Carousel'
+import AutoCarousel from '../Common/AutoCarousel'
 import NavBar from '../../components/Common/NavBar'
+
+import API from '../../api/index'
+import fetchPost from '../../utils/request'
+
 // import { newDate } from '../../utils/dateAbout'
 
 class AppLayout extends Component {
@@ -15,54 +19,26 @@ class AppLayout extends Component {
       searchContent: '',
       // timeNow: -5,
       /* activeIndex: 0, */
-      images: ['/images/img1.jpg', '/images/img2.jpg', '/images/img3.jpg']
+      images: ['/images/img1.jpg', '/images/img2.jpg'],
+      catalog: []
     }
     this.handleSearchChange = this.handleSearchChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    /* this.position = this.position.bind(this) */
-    /* this.playRight = this.playRight.bind(this)
-    this.autoPlay = this.autoPlay.bind(this) */
   }
 
   componentWillMount () {
-    // setInterval(() => {
-    //   this.setState({
-    //     timeNow: this.state.timeNow - 30
-    //   })
-    // }, 15000)
-    // setInterval(() => {
-    //   this.setState({
-    //     timeNow: this.state.timeNow + 10
-    //   })
-    // }, 5000)
-    /* this.autoPlay() */
+    this.asyncGetNavDatas()
   }
 
-  /* autoPlay () {
-    setInterval(this.playRight, 5000)
-  } */
-
-  /* playRight () {
-    let index = this.state.activeIndex + 1
-    console.log(index)
-    if (index > 2) {
-      index = 0
-    }
-    this.setState({
-      activeIndex: index
+  asyncGetNavDatas = async function () {
+    const datas = await fetchPost({
+      url: API.getHomeNav,
+      method: 'get'
     })
-  } */
-
-  /* position () {
-    switch (this.state.activeIndex) {
-      case 0:
-        return 'app-header-bgImg-test1'
-      case 1:
-        return 'app-header-bgImg-test2'
-      case 2:
-        return 'app-header-bgImg-test3'
-    }
-  } */
+    this.setState({
+      catalog: datas.catalog
+    })
+  }
 
   handleSearchChange (e) {
     this.setState({
@@ -71,77 +47,40 @@ class AppLayout extends Component {
   }
 
   handleSubmit () {
-    console.log(this.state.searchContent)
+    this.setState({
+      searchContent: ''
+    })
   }
 
   render () {
-    const navDatas = [
-      {content: '首页', link: '/home'},
-      {
-        content: '协会概况',
-        link: '/StaticPage',
-        children: [
-          {content: '协会介绍', link: '#'},
-          {content: '协会章程', link: '#'}
-        ]
-      },
-      {content: '协会公告', link: '/StaticPage'},
-      {content: '协会动态', link: '/StaticPage'},
-      {content: '诚信建设', link: '/StaticPage'},
-      {
-        content: '创优争先',
-        link: '/StaticPage',
-        children: [
-          {content: '国家级奖项', link: '#'},
-          {content: '秦皇岛市级奖项', link: '#'},
-          {content: '管理规定', link: '#'}
-        ]
-      },
-      {content: 'nav7', link: '/StaticPage'},
-      {content: 'nav8', link: '/StaticPage'}]
+    const catalog = this.state.catalog
     return (
       <div className='app'>
         <div className='app-header'>
           <div className='app-header-bgImg'>
             {/* <div className={this.position()} /> */}
-            <Carousel images={this.state.images} time={10000} />
+            <AutoCarousel images={this.state.images} time={5000}/>
+          </div>
+          <div className='app-header-logo'>
+            <div className='app-header-logo-img'>
+              <img src='/images/QJL_logo.jpg' style={{width:'50px',height:'50px',opacity:'0.5'}} alt=""/>
+            </div>
+            <div className='app-header-logo-ch'>
+              秦皇岛市建筑业联合会
+            </div>
+            <div>
+              Qinhuangdao&nbsp;Construction&nbsp;Association
+            </div>
           </div>
           <div className='app-header-nav'>
             <div className='app-header-nav-list'>
-              <NavBar navDatas={navDatas} />
+              <NavBar navDatas={catalog}/>
             </div>
-            {/* <ul className='app-header-nav-list'>
-              {navDatas.map((nav, i) => {
-                if (!nav.secondNav) {
-                  return (
-                    <li key={i}>
-                      <Link className='nav-font' to={nav.link}>
-                        {nav.content}
-                      </Link>
-                    </li>
-                  )
-                } else {
-                  return (
-                    <li key={i}>
-                      <Link className='nav-font' to={nav.link}>{nav.content}</Link>
-                      <ul className='secondNav'>
-                        {nav.secondNav.map((nav2, i) => {
-                          return (
-                            <li key={i}>
-                              <Link className='nav2-font' to={nav2.link}>
-                                {nav2.content}
-                              </Link>
-                            </li>
-                          )
-                        })}
-                      </ul>
-                    </li>
-                  )
-                }
-              })}
-            </ul> */}
             <div className='app-header-nav-search'>
-              <input className='app-header-nav-search-input' type='text' onChange={this.handleSearchChange} />
+              <input className='app-header-nav-search-input'
+                     type='text'
+                     onChange={this.handleSearchChange}
+                     value={this.state.searchContent}/>
               <div className='app-header-nav-search-font'>
                 <a className='nav-font' onClick={this.handleSubmit}>
                   搜索

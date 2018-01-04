@@ -2,15 +2,16 @@ const path = require('path')
 const baseBabelPlugin = [
   'transform-runtime',
   'transform-decorators-legacy',
-  ["module-resolver", {
-    "alias": {
-      "components": "./src/components",
-      "config": "./src/config",
-      "images": "./src/images",
-      "routes": "./src/routes",
-      "utils": "./src/utils"
+  ['module-resolver', {
+    'alias': {
+      'components': './src/components',
+      'config': './src/config',
+      'images': './src/images',
+      'routes': './src/routes',
+      'utils': './src/utils'
     }
-  }]
+  }],
+  ['import', {'libraryName': 'antd', 'style': true}]
 ]
 
 /**
@@ -27,7 +28,7 @@ export default {
       'iOS >= 8', 'Android >= 4', 'IE>=10'
     ]
   },
-  "ignoreMomentLocale": true,
+  'ignoreMomentLocale': true,
   'env': {
     'development': {
       'extraBabelPlugins': baseBabelPlugin.concat('dva-hmr'),
