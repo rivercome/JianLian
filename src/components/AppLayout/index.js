@@ -2,11 +2,13 @@
  * Created by out_xu on 17/7/13.
  */
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './index.less'
 import AutoCarousel from '../Common/AutoCarousel'
 import NavBar from '../../components/Common/NavBar'
 
+import { catalogStore, pictureStore } from '../../actions'
 import API from '../../api/index'
 import fetchPost from '../../utils/request'
 
@@ -19,7 +21,7 @@ class AppLayout extends Component {
       searchContent: '',
       // timeNow: -5,
       /* activeIndex: 0, */
-      images: ['/images/img1.jpg', '/images/img2.jpg'],
+      images: [],
       catalog: []
     }
     this.handleSearchChange = this.handleSearchChange.bind(this)
@@ -28,6 +30,7 @@ class AppLayout extends Component {
 
   componentWillMount () {
     this.asyncGetNavDatas()
+    this.asyncGetPictures()
   }
 
   asyncGetNavDatas = async function () {
@@ -38,6 +41,18 @@ class AppLayout extends Component {
     this.setState({
       catalog: datas.catalog
     })
+    this.props.dispatch(catalogStore(datas.catalog))
+  }
+
+  asyncGetPictures = async function () {
+    const datas = await fetchPost({
+      url: API.getPictures,
+      method: 'get'
+    })
+    this.setState({
+      images: datas.picture['1']
+    })
+    this.props.dispatch(pictureStore(datas.picture))
   }
 
   handleSearchChange (e) {
@@ -54,16 +69,23 @@ class AppLayout extends Component {
 
   render () {
     const catalog = this.state.catalog
+    const {picture} = this.props
     return (
       <div className='app'>
         <div className='app-header'>
           <div className='app-header-bgImg'>
             {/* <div className={this.position()} /> */}
-            <AutoCarousel images={this.state.images} time={5000}/>
+            {
+              picture['1'] ? (
+                <AutoCarousel images={picture['1']} time={5000}/>
+              ) : (
+                ''
+              )
+            }
           </div>
           <div className='app-header-logo'>
             <div className='app-header-logo-img'>
-              <img src='/images/QJL_logo.jpg' style={{width:'50px',height:'50px',opacity:'0.5'}} alt=""/>
+              <img src='/images/QJL_logo.jpg' style={{width: '50px', height: '50px', opacity: '0.5'}} alt=""/>
             </div>
             <div className='app-header-logo-ch'>
               秦皇岛市建筑业联合会
@@ -108,13 +130,13 @@ class AppLayout extends Component {
             <div className='app-footer-info-line1'>
               秦皇岛市市建筑业联合会版权所有&nbsp;&nbsp;&nbsp;
               xxxxxxxxxxxxxxxxx号&nbsp;&nbsp;&nbsp;
-              联系电话：(xxx)xxxxxxxx&nbsp;&nbsp;&nbsp;传真：（xxx）xxxxxxxx
+              联系电话：(0335)7675616&nbsp;&nbsp;&nbsp;传真：（xxx）xxxxxxxx
             </div>
             <div className='app-footer-info-line2'>
-              邮箱：xxxxxxx@xxx.com&nbsp;&nbsp;&nbsp;
-              联系地址：秦皇岛市xxxxxxxxxxxxx&nbsp;&nbsp;&nbsp;
+              邮箱：qhdsjzylhh@163.com&nbsp;&nbsp;&nbsp;
+              联系地址：秦皇岛市海港区光明路118号&nbsp;&nbsp;&nbsp;
               邮编：066000&nbsp;&nbsp;&nbsp;
-              网站建设: 不洗碗工作室
+              网站建设: 秦皇岛建联
             </div>
           </div>
         </div>
@@ -123,4 +145,10 @@ class AppLayout extends Component {
   }
 }
 
-export default AppLayout
+const mapStateToProps = (state) => {
+  return {
+    picture: state.picture
+  }
+}
+
+export default connect(mapStateToProps)(AppLayout)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './index.less'
 
 class HomeMiddleTitle extends Component {
@@ -54,16 +54,15 @@ class HomeMiddleTitle extends Component {
   }
 
   render () {
-    const title1 = this.props.title1
-    const title2 = this.props.title2
+    const {title1, title2, title1Id, title2Id} = this.props
     // const titleLink = '/staticPage/catalog/' + this.props.link
     return (
       <div className='app-home-middle-title-container'>
         <div onMouseMove={this.handleClickM1}>
-          <Link className={this.FocusM1()} to='#'>{title1}</Link>
+          <Link className={this.FocusM1()} to={'/staticPage/catalog/' + (title1Id || 0)}>{title1}</Link>
         </div>
         <div onMouseMove={this.handleClickM2}>
-          <Link className={this.FocusM2()} to='#'>{title2}</Link>
+          <Link className={this.FocusM2()} to={'/staticPage/catalog/' + (title2Id || 0)}>{title2}</Link>
         </div>
       </div>
     )

@@ -8,7 +8,8 @@ const API = {
   getHomeNav: apiMaker('/catalog/show'),
   getHomeList: apiMaker('/article/list/all'),
   getArticle: apiMaker('/article/'),
-  getCatalogArticle: apiMaker('/article/list/')
+  getCatalogArticle: apiMaker('/article/list/'),
+  getPictures: apiMaker('/picture/show')
 }
 
 export default API

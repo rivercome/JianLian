@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
-import {Icon} from 'antd'
+import { Link } from 'react-router-dom'
+import { Icon } from 'antd'
+import { connect } from 'react-redux'
 import HomeMiddleList from '../../../components/AppComponents/HomeMiddleContainer/HomeMiddleList/index'
 import './index.less'
 
@@ -8,50 +9,72 @@ import fetchPost from '../../../utils/request'
 import API from '../../../api/index'
 
 class StaticPageList extends Component {
-  constructor (){
+  constructor () {
     super()
-    this.state={
-      articleList:[]
+    this.state = {
+      articleList: []
     }
     this.asyncGetCatalogArticle = this.asyncGetCatalogArticle.bind(this)
   }
 
-  componentWillMount(){
-
-  }
-
-  componentWillReceiveProps(){
+  componentWillMount () {
     this.asyncGetCatalogArticle()
-    console.log(1)
   }
 
-  asyncGetCatalogArticle=async function(){
-    console.log(API.getCatalogArticle + this.props.match.params.id)
+  componentWillReceiveProps () {
+    this.asyncGetCatalogArticle()
+  }
+
+  asyncGetCatalogArticle = async function () {
+    const linkId = location.pathname.slice(20)
     const datas = await fetchPost({
-      url:API.getCatalogArticle+this.props.match.params.id,
-      method:'get'
+      url: API.getCatalogArticle + linkId,
+      method: 'get'
     })
-    console.log('cataloglist',datas.list.data)
-    this.setState({
-      articleList:datas.list.data
+    await this.setState({
+      articleList: datas.list.data
     })
+    return datas
   }
 
   render () {
-    const staticNavLists = [' 工作信息', '党群建设', '枢纽成员']
+    let catalogTitle1 = ''
+    let catalogTitle2 = ''
+    let catalogTilte2Array = []
     const articleList = this.state.articleList
-    console.log('al',articleList)
+    if (this.props.catalog[0]) {
+      const catalogs = this.props.catalog
+      catalogs.map((catalog) => {
+        catalog.nextLvCatalog.map((catalog2) => {
+          if (articleList[0] && catalog2.id === articleList[0].article_catalog) {
+            catalogTitle2 = catalog2
+            catalogTitle1 = catalog
+            for (let i = 0; i < catalog.nextLvCatalog.length; i++) {
+              catalogTilte2Array.push(catalog.nextLvCatalog[i])
+            }
+          }
+        })
+      })
+    }
     return (
       <div className='static'>
         <div className='static-nav'>
           <div className='static-nav-top'>
-            <div className='static-nav-top-title'>
-              枢纽园地
-            </div>
+            {catalogTilte2Array[0]?(
+              <Link to={'/staticPage/catalog/'+catalogTilte2Array[0].id} style={{color:'#000000'}}>
+                <div className='static-nav-top-title'>
+                  {catalogTitle1.name}
+                </div>
+              </Link>
+            ):('')}
             <div className='static-nav-top-list'>
-              {staticNavLists.map((staticNavList, i) => {
+              {catalogTilte2Array.map((c2a, i) => {
                 return (
-                  <div className='static-nav-top-list-item' key={i}>{staticNavList}</div>
+                  <Link to={'/staticPage/catalog/' + c2a.id} key={i}>
+                    <div className='static-nav-top-list-item'>
+                      {c2a.name}
+                    </div>
+                  </Link>
                 )
               })}
             </div>
@@ -62,13 +85,15 @@ class StaticPageList extends Component {
         </div>
         <div className='static-content'>
           <div className='static-content-title'>
-            <div className='static-content-title-font'>经验交流</div>
+            <div className='static-content-title-font'>{catalogTitle2.name}</div>
             <div className='static-content-title-bread'>
               <Link to='/home'>首页</Link>
               <Icon type='double-right'/>
-              <Link to='#'>工程管理</Link>
+              {catalogTilte2Array[0]?(
+                <Link to={'/staticPage/catalog/'+catalogTilte2Array[0].id}>{catalogTitle1.name}</Link>
+              ):('')}
               <Icon type='double-right'/>
-              <Link to='#'>经验交流</Link>
+              <Link to='#'>{catalogTitle2.name}</Link>
             </div>
           </div>
           <div className='static-content-list'>
@@ -87,4 +112,10 @@ class StaticPageList extends Component {
   }
 }
 
-export default StaticPageList
+const mapStateToProps = (state) => {
+  return {
+    catalog: state.catalog
+  }
+}
+
+export default connect(mapStateToProps)(StaticPageList)

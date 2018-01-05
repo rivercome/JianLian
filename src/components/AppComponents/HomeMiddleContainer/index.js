@@ -22,7 +22,7 @@ class HomeMiddleContainer extends Component {
   }
 
   render () {
-    const {title1, title2, showNum} = this.props
+    const {title1, title2,title1Id, title2Id, showNum} = this.props
     let listInfo = []
     if (this.state.isFocus.title1 === true) {
       listInfo = this.props.list1Info
@@ -31,7 +31,12 @@ class HomeMiddleContainer extends Component {
     }
     return (
       <div className='app-home-middle-container'>
-        <HomeMiddleTitle title1={title1} title2={title2} title onChangeFocus={this.handleChangeFocus}/>
+        <HomeMiddleTitle
+          title1={title1}
+          title2={title2}
+          title1Id={title1Id}
+          title2Id={title2Id}
+          title onChangeFocus={this.handleChangeFocus}/>
         <div>
           <HomeMiddleList listInfo={listInfo} showNum={showNum}/>
         </div>

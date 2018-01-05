@@ -16,7 +16,7 @@ export default class AutoCarousel extends React.Component {
   }
 
   autoPlay (index, images, time) {
-    (index >= images.length) && (index = 0)
+    (index >= this.props.images.length) && (index = 0)
     this.setState({
       activeBackGround: images[index]
     })
@@ -27,7 +27,7 @@ export default class AutoCarousel extends React.Component {
     return (
       <div className='bgImg' style={{
         animation: `radar ${this.props.time / 1000}s linear infinite`,
-        background: `url("${this.state.activeBackGround}")`
+        background: `url("${this.state.activeBackGround}") no-repeat`
       }}/>
     )
   }

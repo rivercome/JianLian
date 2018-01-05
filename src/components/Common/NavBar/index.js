@@ -8,13 +8,16 @@ export default ({navDatas}) => {
       <li key={-1} className='nav-bar-li'><Link className='nav-bar-li-link' to='/home'>首页</Link></li>
       {navDatas.map((navData, index) => {
         let li1Link = ''
-        if (navData.nextLvCatalog.length === 0) {
-          li1Link = '/staticPage/catalog/' + '999'
-        } else {
+        if (navData.id === 1 && navData.nextLvCatalog[0]) {
+          li1Link = '/staticPage/catalog/' + navData.id
+        } else if (navData.nextLvCatalog[0]) {
           li1Link = '/staticPage/catalog/' + navData.nextLvCatalog[0].id
+        } else {
+          li1Link = '/staticPage/catalog/' + '99999'
         }
-        console.log('dddd=', navData.nextLvCatalog)
-        console.log(li1Link)
+        if (index >= 11) {
+          return ''
+        }
         return (
           <li key={index} className='nav-bar-li'>
             <Link className='nav-bar-li-link' to={li1Link}>{navData.name}</Link>
