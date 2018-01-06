@@ -7,7 +7,8 @@ class NoneAutoCarousel extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      CarouselNum: 0
+      CarouselNum: 0,
+      maxNum: 2
     }
     this.preCarousel = this.preCarousel.bind(this)
     this.nextCarousel = this.nextCarousel.bind(this)
@@ -21,13 +22,13 @@ class NoneAutoCarousel extends React.Component {
 
   preCarousel () {
     this.setState({
-      CarouselNum: ((this.state.CarouselNum - 1) >= 0) ? (this.state.CarouselNum - 1) : (3)
+      CarouselNum: ((this.state.CarouselNum - 1) >= 0) ? (this.state.CarouselNum - 1) : (this.state.maxNum - 1)
     })
   }
 
   nextCarousel () {
     this.setState({
-      CarouselNum: ((this.state.CarouselNum + 1) <= 3) ? (this.state.CarouselNum + 1) : (0)
+      CarouselNum: ((this.state.CarouselNum + 1) < this.state.maxNum) ? (this.state.CarouselNum + 1) : (0)
     })
   }
 
@@ -37,8 +38,11 @@ class NoneAutoCarousel extends React.Component {
         <div className='none-auto-carousel-arrow'>
           <Icon type='left' onClick={this.preCarousel} style={{fontSize: '25px'}}/>
         </div>
-        <div className='none-auto-carousel-center' onClick={this.nextCarousel}>
-          <Carousel autoPaly={false} index={this.state.CarouselNum} images={this.props.images}/>
+        <div className='none-auto-carousel-center-container'>
+          <div className='none-auto-carousel-center' style={{marginLeft: '-' + this.state.CarouselNum * 115 + 'px'}}
+               onClick={this.nextCarousel}>
+            <Carousel autoPaly={false} index={this.state.CarouselNum} images={this.props.images}/>
+          </div>
         </div>
         <div className='none-auto-carousel-arrow'>
           <Icon type='right' onClick={this.nextCarousel} style={{fontSize: '25px'}}/>

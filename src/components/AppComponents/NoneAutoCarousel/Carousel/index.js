@@ -1,9 +1,16 @@
 import React from 'react'
+import './index.less'
 
 class Carousel extends React.Component {
   render () {
     return (
-      <div className='bgImg' style={{background: `url("${this.props.images[this.props.index]}")`}}/>
+      this.props.images.map((image,i)=>{
+        return (
+          <div key={i} className='none-auto-carousel-center-img'>
+            <img src={image} alt=""/>
+          </div>
+        )
+      })
     )
   }
 }

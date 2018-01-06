@@ -11,7 +11,6 @@ import './index.less'
 import API from '../../../api/index'
 import fetchPost from '../../../utils/request'
 import { connect } from 'react-redux'
-import { catalogStore } from '../../../actions'
 
 class AppHomePage extends Component {
   constructor () {
@@ -40,38 +39,32 @@ class AppHomePage extends Component {
   render () {
     const images2 = ['/images/test11.jpg', '/images/test12.jpg', '/images/test13.jpg']
     const images11 = [
-      '/images/test11.jpg',
-      '/images/test12.jpg',
-      '/images/test13.jpg',
-      '/images/test14.jpg',
-      '/images/test11.jpg',
-      '/images/test12.jpg',
-      '/images/test13.jpg',
-      '/images/test14.jpg'
-    ]
-    const images12 = [
-      '/images/test12.jpg',
-      '/images/test11.jpg',
-      '/images/test14.jpg',
-      '/images/test13.jpg',
-      '/images/test12.jpg',
-      '/images/test11.jpg',
-      '/images/test14.jpg',
-      '/images/test13.jpg',
+      '/images/CarouselTest/1.jpeg',
+      '/images/CarouselTest/2.jpg',
+      '/images/CarouselTest/3.jpeg',
+      '/images/CarouselTest/4.jpeg',
+      '/images/CarouselTest/5.jpeg',
+      '/images/CarouselTest/6.jpeg',
+      '/images/CarouselTest/7.jpeg',
+      '/images/CarouselTest/8.jpeg',
+      '/images/CarouselTest/9.jpeg',
+      '/images/CarouselTest/10.jpg',
+      '/images/CarouselTest/11.jpg',
+      '/images/CarouselTest/12.jpg'
     ]
     const images13 = [
-      '/images/test13.jpg',
-      '/images/test14.jpg',
-      '/images/test11.jpg',
-      '/images/test12.jpg',
-      '/images/test13.jpg',
-      '/images/test14.jpg',
-      '/images/test11.jpg',
-      '/images/test12.jpg',
+      '/images/CarouselTest/1.jpeg',
+      '/images/CarouselTest/2.jpg',
+      '/images/CarouselTest/3.jpeg',
+      '/images/CarouselTest/4.jpeg',
+      '/images/CarouselTest/5.jpeg',
+      '/images/CarouselTest/6.jpeg',
+      '/images/CarouselTest/7.jpeg',
+      '/images/CarouselTest/8.jpeg'
     ]
-    const lists=[
-      {"article_id":14,"article_title":"a","created_at":"2018-01-03 09:32:08"},
-      {"article_id":13,"article_title":"aa","created_at":"2018-01-03 09:29:54"}]
+    const lists = [
+      {'article_id': 14, 'article_title': 'a', 'created_at': '2018-01-03 09:32:08'},
+      {'article_id': 13, 'article_title': 'aa', 'created_at': '2018-01-03 09:29:54'}]
     let homeList = []
     if (this.state.homeList) {
       homeList = this.state.homeList
@@ -79,20 +72,25 @@ class AppHomePage extends Component {
       homeList = []
     }
     const {picture, catalog} = this.props
-    if(catalog){
-      console.log('catalog=',catalog)
-    }
-    if(homeList){
-      console.log('homeList',this.state.homeList)
-    }
-    let nav2array=[]
-    homeList.map((home)=>{
-      catalog.map((cat)=>{
-        if(home.catalog_id===cat.id && cat.nextLvCatalog[0]){
-          nav2array.push(cat.nextLvCatalog[0].id)
+    let nav2array = []
+    homeList.map((home) => {
+      catalog.map((cat) => {
+        if (home.catalog_id === cat.id) {
+          if (cat.nextLvCatalog.length === 0) {
+            nav2array.push('')
+          } else {
+            nav2array.push(cat.nextLvCatalog[0].id)
+          }
         }
       })
     })
+    let images1 = []
+    if (images11) {
+      if (images11.length > 8) {
+        const picture3_copy = images11.slice(0, 8)
+        images1 = images11.concat(picture3_copy)
+      }
+    }
     return (
       <div className='app-home'>
         <div id='td-code-left' className='td-code'>
@@ -137,18 +135,18 @@ class AppHomePage extends Component {
               <div className='app-home-top-b-top-more'>
                 {homeList[1] ? (
                   <Link
-                    style={{textDecoration:'none',color:'#ffffff'}}
+                    style={{textDecoration: 'none', color: '#ffffff'}}
                     to={'/staticPage/catalog/' + nav2array[1]}>
                     <Icon type='double-right'/>更多
                   </Link>
                 ) : (
-                  <Link style={{textDecoration:'none',color:'#ffffff'}} to='#'>
+                  <Link style={{textDecoration: 'none', color: '#ffffff'}} to='#'>
                     <Icon type='double-right'/>更多
                   </Link>
                 )}
               </div>
             </div>
-            {homeList[0] ? (
+            {(homeList.length) ? (
               <HomeMiddleList listInfo={homeList[1].article_list} showNum={8}/>
             ) : (
               <div className='app-home-middle-none-content'>
@@ -241,16 +239,19 @@ class AppHomePage extends Component {
           </div>
         </div>
         <div className='app-home-middle3'>
-          {/*<div className='title-right'>*/}
-            {/*优秀建筑展示*/}
-          {/*</div>*/}
-          <HomePictureContainer
-            title1='优秀建筑展示'
-            title2='行业风采'
-            title3='行业精英'
-            images1={images11}
-            images2={images12}
-            images3={images13}/>
+          {
+            picture['3'] ? (
+              <HomePictureContainer
+                title1='优秀建筑展示'
+                title2='行业风采'
+                title3='行业精英'
+                images1={images1}
+                images2={picture['3']}
+                images3={images13}/>
+            ) : (
+              ''
+            )
+          }
         </div>
         <div className='app-home-middle2'>
           {homeList[5] ? (
@@ -270,7 +271,7 @@ class AppHomePage extends Component {
               </div>
             </div>
           )}
-          {homeList[10] ? (
+          {homeList[11] ? (
             <HomeMiddleContainer
               title1={homeList[8].catalog_name}
               title2={homeList[11].catalog_name}
@@ -294,7 +295,13 @@ class AppHomePage extends Component {
               </Link>
             </div>
             <div className='app-home-middle2-c-content'>
-              <NoneAutoCarousel images={images2}/>
+              {
+                picture['4'] ? (
+                  <NoneAutoCarousel images={picture['4']}/>
+                ) : (
+                  ''
+                )
+              }
               <div className='app-home-middle2-c-content-list'>
                 <HomeMiddleList showNum={2} listInfo={lists}/>
               </div>

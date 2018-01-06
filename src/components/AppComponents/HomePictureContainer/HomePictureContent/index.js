@@ -1,14 +1,50 @@
 import React, { Component } from 'react'
+import './index.less'
 
 class HomePictureContent extends Component {
+  constructor () {
+    super()
+    this.animationMatch = this.animationMatch.bind(this)
+  }
+
+  animationMatch () {
+    const images = this.props.images
+    if (images.length === 20) {
+      return 'app-home-picture-content12'
+    } else if (images.length === 19) {
+      return 'app-home-picture-content11'
+    } else if (images.length === 18) {
+      return 'app-home-picture-content10'
+    } else if (images.length === 17) {
+      return 'app-home-picture-content9'
+    } else {
+      return ''
+    }
+  }
+
   render () {
     const images = this.props.images
+    let blankDiv = []
+    let blankNum = 0
+    if (images.length < 8) {
+      blankNum = 8 - images.length
+    }
+    for (let i = 1; i <= blankNum; i++) {
+      blankDiv.push(1)
+    }
     return (
-      <div className='app-home-middle3-content'>
+      <div className={'app-home-picture-content ' + this.animationMatch()}>
         {images.map((image, i) => {
           return (
-            <div key={i} className='app-home-middle3-content-item'>
+            <div key={i} className='app-home-picture-content-item'>
               <img src={image} alt=''/>
+            </div>
+          )
+        })}
+        {blankDiv.map((blank,i)=>{
+          return (
+            <div key={i} className='app-home-picture-content-blank'>
+              暂无图片
             </div>
           )
         })}
