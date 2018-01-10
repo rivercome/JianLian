@@ -25,9 +25,14 @@ class StaticPageArticle extends Component {
     this.asyncGetArticle()
   }
 
+  componentWillReceiveProps () {
+    this.asyncGetArticle()
+  }
+
   asyncGetArticle = async function () {
+    const linkId = location.pathname.slice(20)
     const datas = await fetchPost({
-      url: API.getArticle + this.props.match.params.id,
+      url: API.getArticle + linkId,
       method: 'get'
     })
     this.setState({

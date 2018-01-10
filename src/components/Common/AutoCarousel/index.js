@@ -17,8 +17,14 @@ export default class AutoCarousel extends React.Component {
 
   autoPlay (index, images, time) {
     (index >= this.props.images.length) && (index = 0)
+    let imageId = ''
+    for (let key in images[index]) {
+      if (images[index].hasOwnProperty(key)) {
+        imageId = key
+      }
+    }
     this.setState({
-      activeBackGround: images[index]
+      activeBackGround: images[index][imageId]
     })
     setTimeout(() => this.autoPlay(index + 1, images, time), time)
   }
@@ -28,7 +34,7 @@ export default class AutoCarousel extends React.Component {
       <div className='bgImg' style={{
         animation: `radar ${this.props.time / 1000}s linear infinite`,
         background: `url("${this.state.activeBackGround}") no-repeat`
-      }} />
+      }}/>
     )
   }
 }

@@ -1,6 +1,7 @@
 const initState = {
   catalog: [],
-  picture: {}
+  picture: {},
+  surveyArticleIds: ''
 }
 
 function Reducer (state = initState, action) {
@@ -14,6 +15,14 @@ function Reducer (state = initState, action) {
       return {
         ...state,
         picture: action.payload
+      }
+    case 'ADD_SURVEY':
+      return {
+        ...state,
+        surveyArticleIds: [
+          ...state.surveyArticleIds,
+          action.payload
+        ]
       }
     default:
       return state

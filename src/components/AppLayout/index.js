@@ -8,11 +8,9 @@ import './index.less'
 import AutoCarousel from '../Common/AutoCarousel'
 import NavBar from '../../components/Common/NavBar'
 
-import { catalogStore, pictureStore } from '../../actions'
+import { catalogStore, pictureStore, surveyArticleIdsStore } from '../../actions'
 import API from '../../api/index'
 import fetchPost from '../../utils/request'
-
-// import { newDate } from '../../utils/dateAbout'
 
 class AppLayout extends Component {
   constructor () {
@@ -26,6 +24,7 @@ class AppLayout extends Component {
     }
     this.handleSearchChange = this.handleSearchChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.asyncGetCatalogArticle = this.asyncGetCatalogArticle.bind(this)
   }
 
   componentWillMount () {
@@ -42,6 +41,9 @@ class AppLayout extends Component {
       catalog: datas.catalog
     })
     this.props.dispatch(catalogStore(datas.catalog))
+    datas.catalog[0].nextLvCatalog.map((nav2) => {
+      this.asyncGetCatalogArticle(nav2.id)
+    })
   }
 
   asyncGetPictures = async function () {
@@ -53,6 +55,14 @@ class AppLayout extends Component {
       images: datas.picture['1']
     })
     this.props.dispatch(pictureStore(datas.picture))
+  }
+
+  asyncGetCatalogArticle = async function (linkId) {
+    const datas = await fetchPost({
+      url: API.getCatalogArticle + linkId,
+      method: 'get'
+    })
+    this.props.dispatch(surveyArticleIdsStore(datas.list.data[0].article_id))
   }
 
   handleSearchChange (e) {
@@ -69,7 +79,7 @@ class AppLayout extends Component {
 
   render () {
     const catalog = this.state.catalog
-    const {picture} = this.props
+    const {picture, surveyArticleIds} = this.props
     return (
       <div className='app'>
         <div className='app-header'>
@@ -96,7 +106,7 @@ class AppLayout extends Component {
           </div>
           <div className='app-header-nav'>
             <div className='app-header-nav-list'>
-              <NavBar navDatas={catalog}/>
+              <NavBar navDatas={catalog} surveyId={surveyArticleIds}/>
             </div>
             <div className='app-header-nav-search'>
               <input className='app-header-nav-search-input'
@@ -147,7 +157,8 @@ class AppLayout extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    picture: state.picture
+    picture: state.picture,
+    surveyArticleIds: state.surveyArticleIds
   }
 }
 

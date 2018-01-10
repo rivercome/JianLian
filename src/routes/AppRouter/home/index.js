@@ -39,28 +39,28 @@ class AppHomePage extends Component {
   render () {
     const images2 = ['/images/test11.jpg', '/images/test12.jpg', '/images/test13.jpg']
     const images11 = [
-      '/images/CarouselTest/1.jpeg',
-      '/images/CarouselTest/2.jpg',
-      '/images/CarouselTest/3.jpeg',
-      '/images/CarouselTest/4.jpeg',
-      '/images/CarouselTest/5.jpeg',
-      '/images/CarouselTest/6.jpeg',
-      '/images/CarouselTest/7.jpeg',
-      '/images/CarouselTest/8.jpeg',
-      '/images/CarouselTest/9.jpeg',
-      '/images/CarouselTest/10.jpg',
-      '/images/CarouselTest/11.jpg',
-      '/images/CarouselTest/12.jpg'
+      {'1':'/images/CarouselTest/1.jpeg'},
+      {'2':'/images/CarouselTest/2.jpg'},
+      {'3':'/images/CarouselTest/3.jpeg'},
+      {'4':'/images/CarouselTest/4.jpeg'},
+      {'5':'/images/CarouselTest/5.jpeg'},
+      {'6':'/images/CarouselTest/6.jpeg'},
+      {'7':'/images/CarouselTest/7.jpeg'},
+      {'8':'/images/CarouselTest/8.jpeg'},
+      {'9':'/images/CarouselTest/9.jpeg'},
+      {'10':'/images/CarouselTest/10.jpg'},
+      {'11':'/images/CarouselTest/11.jpg'},
+      {'12':'/images/CarouselTest/12.jpg'},
     ]
     const images13 = [
-      '/images/CarouselTest/1.jpeg',
-      '/images/CarouselTest/2.jpg',
-      '/images/CarouselTest/3.jpeg',
-      '/images/CarouselTest/4.jpeg',
-      '/images/CarouselTest/5.jpeg',
-      '/images/CarouselTest/6.jpeg',
-      '/images/CarouselTest/7.jpeg',
-      '/images/CarouselTest/8.jpeg'
+      {'1':'/images/CarouselTest/1.jpeg'},
+      {'2':'/images/CarouselTest/2.jpg'},
+      {'3':'/images/CarouselTest/3.jpeg'},
+      {'4':'/images/CarouselTest/4.jpeg'},
+      {'5':'/images/CarouselTest/5.jpeg'},
+      {'6':'/images/CarouselTest/6.jpeg'},
+      {'7':'/images/CarouselTest/7.jpeg'},
+      {'8':'/images/CarouselTest/8.jpeg'}
     ]
     const lists = [
       {'article_id': 14, 'article_title': 'a', 'created_at': '2018-01-03 09:32:08'},

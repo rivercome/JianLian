@@ -35,9 +35,15 @@ class HomePictureContent extends Component {
     return (
       <div className={'app-home-picture-content ' + this.animationMatch()}>
         {images.map((image, i) => {
+          let imageId = ''
+          for (let key in image) {
+            if (image.hasOwnProperty(key)) {
+              imageId = image[key]
+            }
+          }
           return (
             <div key={i} className='app-home-picture-content-item'>
-              <img src={image} alt=''/>
+              <img src={imageId} alt=''/>
             </div>
           )
         })}

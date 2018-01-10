@@ -11,3 +11,10 @@ export function pictureStore (picture) {
     payload: picture
   }
 }
+
+export function surveyArticleIdsStore (articleId) {
+  return {
+    type: 'ADD_SURVEY',
+    payload: articleId
+  }
+}
