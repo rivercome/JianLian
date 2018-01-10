@@ -37,5 +37,6 @@ export default {
       // 'publicPath': '',
       'extraBabelPlugins': baseBabelPlugin
     }
-  }
+  },
+  publicPath: "http://qhdjl.cdn.neuqzxy.cn/fe/"
 }

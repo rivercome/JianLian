@@ -1,5 +1,5 @@
 import React from 'react'
-import qiniuConfig, {QINIU_SERVER, QINIU_PATH} from '../../../../config/qiniu.config'
+import qiniuConfig, {QINIU_SERVER} from '../../../../config/qiniu.config'
 import { Upload, Icon, Modal, message } from 'antd'
 import {basePath} from '../../../../config/api'
 import axios from 'axios'
@@ -11,7 +11,6 @@ export default class CarouselPage extends React.Component {
     this.state = {
       previewVisible: false,
       previewImage: '',
-      fileList: [],
       tokenData: {
         token: null
       }
@@ -19,10 +18,10 @@ export default class CarouselPage extends React.Component {
   }
 
   componentWillMount () {
-    this.getImages()
+    // this.getImages()
   }
 
-  getImages () {
+  /* getImages () {
     axios.get(`${basePath}/picture/show`)
       .then(res => {
         let fileList = []
@@ -36,7 +35,7 @@ export default class CarouselPage extends React.Component {
         }
         this.setState({fileList})
       })
-  }
+  } */
 
   getToken (accessKey, secretKey, bucket) {
     return axios.post(`${basePath}/upload`, {
@@ -59,17 +58,17 @@ export default class CarouselPage extends React.Component {
     })
   }
 
-  handleChange = (data) => {
+  /* handleChange = (data) => {
     this.setState({ fileList: data.fileList })
     if (data.file.status === 'done') {
-      this.syncImgData(data.file.response.hash, data)
+      this.props.syncImgData(data.file.response.hash, data, this.props.id)
     }
-  }
+  } */
 
-  syncImgData (url, data) {
+  /* syncImgData (url, data, id) {
     axios.post(`${basePath}/picture/add`, {
       picture_url: `${QINIU_PATH}/${url}`,
-      picture_type: this.props.id
+      picture_type: id
     }).then(res => {
       if (res.data.code === 1000) {
         message.success('图片上传成功')
@@ -84,9 +83,9 @@ export default class CarouselPage extends React.Component {
         message.error('图片上传失败')
       }
     })
-  }
+  } */
 
-  removePicture (data) {
+  /* removePicture (data) {
     return new Promise((resolve, reject) => {
       axios.get(`${basePath}/picture/delete/${data.uid}`)
         .then(res => {
@@ -99,7 +98,7 @@ export default class CarouselPage extends React.Component {
           }
         })
     })
-  }
+  } */
 
   async beforeUpload () {
     await this.getToken(qiniuConfig.ACCESS_KEY, qiniuConfig.SECRET_KEY, qiniuConfig.Bucket_Name)
@@ -107,7 +106,7 @@ export default class CarouselPage extends React.Component {
   }
 
   render () {
-    const { previewVisible, previewImage, fileList } = this.state
+    const { previewVisible, previewImage } = this.state
     const uploadButton = (
       <div>
         <Icon type='plus' />
@@ -120,13 +119,13 @@ export default class CarouselPage extends React.Component {
           action={QINIU_SERVER}
           beforeUpload={this.beforeUpload.bind(this)}
           listType='picture-card'
-          fileList={fileList}
+          fileList={this.props.pictures}
           onPreview={this.handlePreview}
-          onChange={this.handleChange}
+          onChange={(e) => { this.props.handleChange(e, this.props.id) }}
           data={this.state.tokenData}
-          onRemove={this.removePicture}
+          onRemove={this.props.removePicture}
         >
-          {fileList.length > 5 ? null : uploadButton}
+          {this.props.pictures && (this.props.pictures.length > 5) ? null : uploadButton}
         </Upload>
         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
           <img alt='example' style={{ width: '100%' }} src={previewImage} />

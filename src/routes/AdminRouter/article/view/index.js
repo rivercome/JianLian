@@ -20,7 +20,8 @@ export default class ArticleView extends React.Component {
         title: '发布时间',
         dataIndex: 'time',
         key: 'time',
-        sorter: (a, b) => new Date(a.time) - new Date(b.time)
+        sorter: (a, b) => new Date(a.time) - new Date(b.time),
+        width: 200
       }, {
         title: '操作',
         key: 'action',
@@ -32,7 +33,8 @@ export default class ArticleView extends React.Component {
               <a onClick={this.removeArticle.bind(this, text.key)}>删除</a>
             </span>
           )
-        }
+        },
+        width: 120
       }],
       loading: true,
       pagination: {

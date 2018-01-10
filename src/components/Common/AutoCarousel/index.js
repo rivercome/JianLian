@@ -28,7 +28,7 @@ export default class AutoCarousel extends React.Component {
       <div className='bgImg' style={{
         animation: `radar ${this.props.time / 1000}s linear infinite`,
         background: `url("${this.state.activeBackGround}") no-repeat`
-      }}/>
+      }} />
     )
   }
 }

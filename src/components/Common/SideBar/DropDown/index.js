@@ -53,7 +53,7 @@ export default class DropDown extends React.Component {
       ) : (
         <div className='side-bar-list'>
           <Link className='link' to={sideBarList.link || '/'}>
-            <i className={`iconfont ${sideBarList.icon}`} /> &nbsp;
+            <i style={{fontSize: '1.2em'}} className={`iconfont ${sideBarList.icon}`} /> &nbsp;
             {sideBarList.title}
           </Link>
         </div>

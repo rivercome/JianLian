@@ -130,7 +130,6 @@ class Catalog extends React.Component {
     })
   }
   addSecondTitle (e, addSecondTitlePId) {
-    console.log(addSecondTitlePId)
     this.setState({addSecondTitlePId, visible: true, addTitle: '新建二级目录'})
   }
   render () {

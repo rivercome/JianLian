@@ -78,6 +78,11 @@ export default class AdminLayout extends React.Component {
               link: '/admin/catalog'
             }
           ]
+        },
+        {
+          title: '用户信息',
+          icon: 'icon-yonghu',
+          link: '/admin/user'
         }
       ]
     }
