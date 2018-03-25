@@ -52,7 +52,6 @@ class AdminRouter extends React.Component {
     buttonText: '登录'
   }
   componentWillReceiveProps (nextProps) {
-    console.log('a')
     if (nextProps.location.pathname !== this.props.location.pathname && new Date().getTime() > parseInt(localStorage.getItem('time'))) {
       this.checkToken()
     }

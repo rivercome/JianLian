@@ -31,7 +31,6 @@ export default class ArticleView extends React.Component {
               })
             }
           }
-          console.log('pictures', pictures)
           this.setState({pictures})
         } else {
           message.error('获取信息发生错误')
