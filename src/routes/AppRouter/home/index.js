@@ -94,7 +94,7 @@ class AppHomePage extends Component {
     }
     return (
       <div className='app-home'>
-        {/* <div id='td-code-left' className='td-code'>
+        <div id='td-code-left' className='td-code'>
           <div className='td-code-img'>
             <img src='/images/tdCode.jpg' alt=""/>
           </div>
@@ -102,8 +102,8 @@ class AppHomePage extends Component {
             微信公众号<br/>
             欢迎关注
           </div>
-        </div> */}
-        {/* <div id='td-code-right' className='td-code'>
+        </div>
+        <div id='td-code-right' className='td-code'>
           <div className='td-code-img'>
             <img src='/images/tdCode.jpg' alt=""/>
           </div>
@@ -111,7 +111,7 @@ class AppHomePage extends Component {
             微信公众号<br/>
             欢迎关注
           </div>
-        </div> */}
+        </div>
         <div className='app-home-top'>
           <div className='app-home-top-a'>
             {
