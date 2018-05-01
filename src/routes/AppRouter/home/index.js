@@ -64,7 +64,8 @@ class AppHomePage extends Component {
     ]
     const lists = [
       {'article_id': 14, 'article_title': 'a', 'created_at': '2018-01-03 09:32:08'},
-      {'article_id': 13, 'article_title': 'aa', 'created_at': '2018-01-03 09:29:54'}]
+      {'article_id': 13, 'article_title': 'aa', 'created_at': '2018-01-03 09:29:54'}
+    ]
     let homeList = []
     if (this.state.homeList) {
       homeList = this.state.homeList
@@ -93,7 +94,7 @@ class AppHomePage extends Component {
     }
     return (
       <div className='app-home'>
-        <div id='td-code-left' className='td-code'>
+        {/* <div id='td-code-left' className='td-code'>
           <div className='td-code-img'>
             <img src='/images/tdCode.jpg' alt=""/>
           </div>
@@ -101,8 +102,8 @@ class AppHomePage extends Component {
             微信公众号<br/>
             欢迎关注
           </div>
-        </div>
-        <div id='td-code-right' className='td-code'>
+        </div> */}
+        {/* <div id='td-code-right' className='td-code'>
           <div className='td-code-img'>
             <img src='/images/tdCode.jpg' alt=""/>
           </div>
@@ -110,7 +111,7 @@ class AppHomePage extends Component {
             微信公众号<br/>
             欢迎关注
           </div>
-        </div>
+        </div> */}
         <div className='app-home-top'>
           <div className='app-home-top-a'>
             {
