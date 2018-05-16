@@ -36,7 +36,7 @@ class HomeMiddleContainer extends Component {
       <div className='app-home-picture-container'>
         <HomePictureTitle title1={title1} title2={title2} title3={title3} title onChangeFocus={this.handleChangeFocus}/>
         <div className='app-home-picture-container-content'>
-          <HomePictureContent images={images}/>
+          <HomePictureContent images={images || []}/>
         </div>
       </div>
     )

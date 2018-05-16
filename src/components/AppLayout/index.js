@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 import './index.less'
 import AutoCarousel from '../Common/AutoCarousel'
 import NavBar from '../../components/Common/NavBar'
-
 import { catalogStore, pictureStore, surveyArticleIdsStore } from '../../actions'
 import API from '../../api/index'
 import fetchPost from '../../utils/request'
@@ -52,17 +51,16 @@ class AppLayout extends Component {
       method: 'get'
     })
     this.setState({
-      images: datas.picture['1']
+      images: datas.pictures[1].map(item => item.picture_url)
     })
-    this.props.dispatch(pictureStore(datas.picture))
+    this.props.dispatch(pictureStore(datas.pictures))
   }
-
   asyncGetCatalogArticle = async function (linkId) {
     const datas = await fetchPost({
       url: API.getCatalogArticle + linkId,
       method: 'get'
     })
-    this.props.dispatch(surveyArticleIdsStore(datas.list.data[0].article_id))
+    // this.props.dispatch(surveyArticleIdsStore(datas.list.data[0].article_id))
   }
 
   handleSearchChange (e) {
@@ -87,7 +85,7 @@ class AppLayout extends Component {
             {/* <div className={this.position()} /> */}
             {
               picture['1'] ? (
-                <AutoCarousel images={picture['1']} time={5000}/>
+                <AutoCarousel images={picture['1']} time={5000} />
               ) : (
                 ''
               )

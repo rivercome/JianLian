@@ -7,7 +7,6 @@ import HomeMiddleContainer from '../../../components/AppComponents/HomeMiddleCon
 import HomeMiddleList from '../../../components/AppComponents/HomeMiddleContainer/HomeMiddleList'
 import HomePictureContainer from '../../../components/AppComponents/HomePictureContainer/index'
 import './index.less'
-
 import API from '../../../api/index'
 import fetchPost from '../../../utils/request'
 import { connect } from 'react-redux'
@@ -246,9 +245,9 @@ class AppHomePage extends Component {
                 title1='优秀建筑展示'
                 title2='行业风采'
                 title3='行业精英'
-                images1={images1}
-                images2={picture['3']}
-                images3={images13}/>
+                images1={picture['3']}
+                images2={picture['4']}
+                images3={picture['5']}/>
             ) : (
               ''
             )
@@ -297,8 +296,8 @@ class AppHomePage extends Component {
             </div>
             <div className='app-home-middle2-c-content'>
               {
-                picture['4'] ? (
-                  <NoneAutoCarousel images={picture['4']}/>
+                picture['6'] ? (
+                  <NoneAutoCarousel images={picture['6'] || []}/>
                 ) : (
                   ''
                 )

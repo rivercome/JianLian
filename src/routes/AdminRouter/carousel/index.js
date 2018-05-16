@@ -9,25 +9,42 @@ import './index.less'
 
 export default class ArticleView extends React.Component {
   state = {
-    pictures: []
+    pictures: [],
+    previewVisible: false,
+    previewImage: '',
   }
   componentWillMount () {
     this.getImages()
   }
   getImages () {
-    axios.get(`${basePath}/picture/show`)
+    // let urlArr = new Array(6).fill(0).map((item, index) => {
+    //   return `${basePath}/picture/lun/show/${index + 1}`
+    // })
+    // Promise.all(urlArr.map(item => axios.get(item)))
+    //   .then(res => {
+    //     console.log(res)
+    //     const json = (res || []).map((item,index) =>{
+    //       return {
+    //         pictures: json.item
+    //       }
+    //     })
+    //   })
+    axios.get(`${basePath}/pictures/lun/show/`)
       .then(res => {
         if (res.data.code === 1000) {
           let pictures = []
-          for (let item in res.data.picture) {
+          for (let item in res.data.pictures) {
             pictures[item] = []
-            for (let i in res.data.picture[item]) {
-              let key = Object.keys(res.data.picture[item][i])[0]
+            for (let i in res.data.pictures[item]) {
+              // let key = Object.keys(res.data.pictures[item][i])[0]
               pictures[item].push({
-                uid: key,
+                uid: res.data.pictures[item][i].id,
                 name: 'xxx.png',
-                state: 'done',
-                url: res.data.picture[item][i][key]
+                status: 'done',
+                id: res.data.pictures[item][i].id,
+                link_url: res.data.pictures[item][i].url ,
+                type: res.data.pictures[item][i].type,
+                url: res.data.pictures[item][i].picture_url
               })
             }
           }
@@ -38,9 +55,10 @@ export default class ArticleView extends React.Component {
       })
   }
   syncImgData (url, data, id) {
-    axios.post(`${basePath}/picture/add`, {
+    axios.post(`${basePath}/picture/lun/add`, {
       picture_url: `${QINIU_PATH}/${url}`,
-      picture_type: id
+      type: id,
+      url: '#'
     }).then(res => {
       if (res.data.code === 1000) {
         message.success('图片上传成功')
@@ -58,7 +76,7 @@ export default class ArticleView extends React.Component {
     })
   }
   handleChange = (data, id) => {
-    console.log(data)
+    // console.log(data)
     let pictures = [...this.state.pictures]
     pictures[id] = data.fileList
     this.setState({pictures})
@@ -68,7 +86,7 @@ export default class ArticleView extends React.Component {
   }
   removePicture (data) {
     return new Promise((resolve, reject) => {
-      axios.get(`${basePath}/picture/delete/${data.uid}`)
+      axios.get(`${basePath}/picture/lun/delete/${data.uid}`)
         .then(res => {
           if (res.data.code === 1000) {
             message.success('删除成功')

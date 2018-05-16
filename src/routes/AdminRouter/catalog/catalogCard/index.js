@@ -19,7 +19,6 @@ class catalogCard extends React.Component {
     }
   }
   componentWillMount () {
-    console.log(this.props.catalog)
   }
   titleData () {
     return (
@@ -60,7 +59,7 @@ class catalogCard extends React.Component {
     })
   }
   removeTitle (id, type) {
-    console.log(id, type)
+    // console.log(id, type)
     axios.get(`${basePath}/catalog/delete/${id}`)
       .then(res => {
         if (res.data.code === 1000) {

@@ -1,27 +1,12 @@
 import React from 'react'
-import qiniuConfig, {QINIU_SERVER} from '../../../../config/qiniu.config'
-import { Upload, Icon, Modal, message } from 'antd'
+import qiniuConfig, { QINIU_SERVER } from '../../../../config/qiniu.config'
+import { Upload, Icon, Modal, message, Input, Button } from 'antd'
 import {basePath} from '../../../../config/api'
 import axios from 'axios'
 import './index.less'
 
 export default class CarouselPage extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      previewVisible: false,
-      previewImage: '',
-      tokenData: {
-        token: null
-      }
-    }
-  }
-
-  componentWillMount () {
-    // this.getImages()
-  }
-
-  /* getImages () {
+    /* getImages () {
     axios.get(`${basePath}/picture/show`)
       .then(res => {
         let fileList = []
@@ -37,6 +22,34 @@ export default class CarouselPage extends React.Component {
       })
   } */
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      previewVisible: false,
+      linkUrl: '',
+      pictureId: '',
+      previewImage: '',
+      pictureLink: '',
+      pictures: [],
+      tokenData: {
+        token: null
+      }
+    }
+    this.handleUrl = this.handleUrl.bind(this)
+  }
+  handleCancel = () => this.setState({previewVisible: false})
+  handlePreview = (file) => {
+    // console.log(file)
+    this.setState({
+      previewImage: file.url || file.thumbUrl,
+      previewVisible: true,
+      linkUrl: file.link_url === '#' ? '' : file.link_url,
+      pictureId: file.id
+    })
+  }
+  componentWillMount () {
+  }
+
   getToken (accessKey, secretKey, bucket) {
     return axios.post(`${basePath}/upload`, {
       accessKey,
@@ -44,18 +57,31 @@ export default class CarouselPage extends React.Component {
       bucket
     }).then(res => {
       this.setState({tokenData: res.data})
-    }).catch(data => {
+    }).catch(() => {
       message.error('获取token出错')
     })
   }
 
-  handleCancel = () => this.setState({ previewVisible: false })
-
-  handlePreview = (file) => {
-    this.setState({
-      previewImage: file.url || file.thumbUrl,
-      previewVisible: true
-    })
+  handleUrl (e) {
+    const pictureId = this.state.pictureId
+    const picture = this.props.pictures.filter(item => item.uid === this.state.pictureId)[0]
+    if (picture.id === void 0) {
+      return message.error('发生错误')
+    }
+    const config = {
+      method: 'post',
+      url: `${basePath}/picture/lun/${pictureId}`,
+      headers: {'Content-Type': 'application/json'},
+      data: {
+        url: this.state.linkUrl,
+        type: picture.type,
+        picture_url: picture.url
+      }
+    }
+    axios(config)
+      .then(res => {
+        message.success("保存成功")
+      })
   }
 
   /* handleChange = (data) => {
@@ -106,7 +132,7 @@ export default class CarouselPage extends React.Component {
   }
 
   render () {
-    const { previewVisible, previewImage } = this.state
+    const {previewVisible, previewImage} = this.state
     const uploadButton = (
       <div>
         <Icon type='plus' />
@@ -128,7 +154,9 @@ export default class CarouselPage extends React.Component {
           {this.props.pictures && (this.props.pictures.length > 5) ? null : uploadButton}
         </Upload>
         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-          <img alt='example' style={{ width: '100%' }} src={previewImage} />
+          <Input key={this.state.id} onChange={(e) => { this.setState({linkUrl: e.target.value}) }} value={this.state.linkUrl} addonBefore='输入图片链接' style={{width: '80%', float: 'left'}} /><Button
+          onClick={this.handleUrl}>保存</Button>
+          <img alt='example' style={{width: '100%'}} src={previewImage} />
         </Modal>
       </div>
     )

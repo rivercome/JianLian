@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
 import './index.less'
+import axios from 'axios'
+import { basePath } from '../../../../config/api'
 
 class HomePictureContent extends Component {
   constructor () {
     super()
+    this.state = {
+      images: []
+    }
     this.animationMatch = this.animationMatch.bind(this)
   }
 
   animationMatch () {
-    const images = this.props.images
+    const images = this.props.images || []
     if (images.length === 20) {
       return 'app-home-picture-content12'
     } else if (images.length === 19) {
@@ -23,7 +28,7 @@ class HomePictureContent extends Component {
   }
 
   render () {
-    const images = this.props.images
+    const images = this.props.images || []
     let blankDiv = []
     let blankNum = 0
     if (images.length < 8) {
@@ -32,22 +37,25 @@ class HomePictureContent extends Component {
     for (let i = 1; i <= blankNum; i++) {
       blankDiv.push(1)
     }
+    // console.log(images)
     return (
       <div className={'app-home-picture-content ' + this.animationMatch()}>
         {images.map((image, i) => {
           let imageId = ''
+          let link = '#'
           for (let key in image) {
             if (image.hasOwnProperty(key)) {
-              imageId = image[key]
+              imageId = image.picture_url
+              link = image.url
             }
           }
           return (
             <div key={i} className='app-home-picture-content-item'>
-              <img src={imageId} alt=''/>
+              <a href={link}><img src={imageId} alt='' style={{width: '100%',height: '100%'}} /></a>
             </div>
           )
         })}
-        {blankDiv.map((blank,i)=>{
+        {blankDiv.map((blank, i) => {
           return (
             <div key={i} className='app-home-picture-content-blank'>
               暂无图片

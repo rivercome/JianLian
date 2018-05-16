@@ -13,9 +13,8 @@ export default class ArticleView extends React.Component {
       data: [],
       columns: [{
         title: '标题',
-        dataIndex: 'title',
         key: 'title',
-        render: text => <a href='#'>{text}</a>
+        render: (text) => <a className='btn' data-clipboard-text={location.origin + '/staticPage/article/' + text.key}>{text.title}</a>
       }, {
         title: '发布时间',
         dataIndex: 'time',
@@ -47,7 +46,14 @@ export default class ArticleView extends React.Component {
   componentWillMount () {
     this.getArtical(querystring.parse(this.props.location.search).classId)
   }
+  componentDidMount () {
+    let ClipboardJS = window.ClipboardJS
+    let clipboard = new ClipboardJS('.btn')
 
+    clipboard.on('success', () => {
+      message.success('链接成功复制到剪贴板')
+    })
+  }
   componentWillReceiveProps (nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname) {
       this.getArtical(querystring.parse(nextProps.location.search).classId)
@@ -55,7 +61,7 @@ export default class ArticleView extends React.Component {
   }
 
   removeArticle (id) {
-    console.log(id)
+    // console.log(id)
     axios.get(`${basePath}/article/delete/${id}`)
       .then(res => {
         if (res.data.code === 1000) {

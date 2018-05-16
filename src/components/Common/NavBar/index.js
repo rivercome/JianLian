@@ -49,7 +49,6 @@ export default ({navDatas, surveyId}) => {
         if (!navData || !navData.id) {
           return ''
         }
-        console.log(navData)
         let li1Link = ''
         if (navData.id === 1 && navData.nextLvCatalog[0]) {
           li1Link = '/staticPage/article/' + surveyId[0]
