@@ -7,8 +7,8 @@ export default class ArticlePage extends React.Component {
   render () {
     return (
       <Switch>
-        <Route exact path='/admin/article/view/:id' component={ArticleViewPage} />
-        <Route exact path='/admin/article/edit' component={ArticleEditPage} />
+        <Route exact path='/jzylhh/article/view/:id' component={ArticleViewPage} />
+        <Route exact path='/jzylhh/article/edit' component={ArticleEditPage} />
       </Switch>
     )
   }

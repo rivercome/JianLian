@@ -93,12 +93,12 @@ class AppLayout extends Component {
           </div>
           <div className='app-header-logo'>
             <div className='app-header-logo-img'>
-              <img src='/images/QJL_logo.jpg' style={{width: '50px', height: '50px', opacity: '0.5'}} alt=""/>
+              {/*<img src='/images/QJL_logo.jpg' style={{width: '50px', height: '50px', opacity: '0.5'}} alt=""/>*/}
             </div>
             <div className='app-header-logo-ch'>
               秦皇岛市建筑业联合会
             </div>
-            <div>
+            <div className='app-header-logo-en'>
               Qinhuangdao&nbsp;Construction&nbsp;Association
             </div>
           </div>

@@ -17,7 +17,7 @@ export default class AdminLayout extends React.Component {
           children: [
             {
               title: '轮播图',
-              link: '/admin/carousel'
+              link: '/jzylhh/carousel'
             }
           ]
         },
@@ -32,14 +32,14 @@ export default class AdminLayout extends React.Component {
           children: [
             {
               title: '导航目录',
-              link: '/admin/catalog'
+              link: '/jzylhh/catalog'
             }
           ]
         },
         {
           title: '用户信息',
           icon: 'icon-yonghu',
-          link: '/admin/user'
+          link: '/jzylhh/user'
         }
       ]
     }
@@ -58,7 +58,7 @@ export default class AdminLayout extends React.Component {
                 return {
                   id: child.id,
                   title: child.name,
-                  link: `/admin/article/view/${child.id}?className=${child.name}&parentClassName=${item.name}&classId=${child.id}&parentClassId=${item.id}`
+                  link: `/jzylhh/article/view/${child.id}?className=${child.name}&parentClassName=${item.name}&classId=${child.id}&parentClassId=${item.id}`
                 }
               })
             }
@@ -85,8 +85,8 @@ export default class AdminLayout extends React.Component {
       <div className='admin'>
         <header className='admin-header'>
           <div className='admin-header-left'>
-            <Link to='/admin' style={{textDecoration: 'none', cursor: 'pointer'}}>
-              <span className='admin-header-left-title-1'>秦皇岛建联</span><span className='admin-header-left-title-2'>后台管理</span>
+            <Link to='/jzylhh' style={{textDecoration: 'none', cursor: 'pointer'}}>
+              <span className='admin-header-left-title-1'>秦皇岛建联</span><span className='jzylhh-header-left-title-2'>后台管理</span>
             </Link>
           </div>
           <div className='admin-header-right' />

@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div style={{height: '100%'}}>
       <Switch>
-        <Route path='/admin' component={AdminRouter} />
+        <Route path='/jzylhh' component={AdminRouter} />
         <Route path='/' component={AppRouter} />
       </Switch>
     </div>

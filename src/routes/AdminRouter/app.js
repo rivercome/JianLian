@@ -117,11 +117,11 @@ class AdminRouter extends React.Component {
     return (
       <AdminLayout>
         <Switch>
-          <Route exact path='/admin' component={AdminIntroducePage} />
-          <Route exact path='/admin/carousel' component={AdminCarouselPage} />
-          <Route path='/admin/article' component={AdminArticlePage} />
-          <Route path='/admin/catalog' component={AdminCatalogPage} />
-          <Route path='/admin/user' component={AdminUserPage} />
+          <Route exact path='/jzylhh' component={AdminIntroducePage} />
+          <Route exact path='/jzylhh/carousel' component={AdminCarouselPage} />
+          <Route path='/jzylhh/article' component={AdminArticlePage} />
+          <Route path='/jzylhh/catalog' component={AdminCatalogPage} />
+          <Route path='/jzylhh/user' component={AdminUserPage} />
         </Switch>
         <Modal title='登录状态失效，请输入密码' okText={buttonText} maskClosable={false} visible={visible} onOk={this.handleSubmit.bind(this)} confirmLoading={confirmLoading} onCancel={this.handleCancle.bind(this)}>
           <Form layout='inline'>
