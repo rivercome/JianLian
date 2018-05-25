@@ -93,6 +93,7 @@ class AppHomePage extends Component {
         images1 = images11.concat(picture3_copy)
       }
     }
+    console.log(nav2array, homeList, catalog)
     return (
       <div className='app-home'>
         <div id='td-code-left' className='td-code'>
@@ -275,8 +276,9 @@ class AppHomePage extends Component {
         <div className='app-home-middle2'>
           {homeList[5] ? (
             <HomeMiddleContainer
-              title1={homeList[5].catalog_name}
-              title2={homeList[7].catalog_name}
+              title1={''}
+              title2={''}
+              /* 此处所传值有问题*/
               title1Id={nav2array[5]}
               title2Id={nav2array[7]}
               list1Info={homeList[5].article_list}
@@ -290,22 +292,15 @@ class AppHomePage extends Component {
               </div>
             </div>
           )}
-          {homeList[11] ? (
+          {(
             <HomeMiddleContainer
-              title1={homeList[8].catalog_name}
-              title2={homeList[11].catalog_name}
-              title1Id={nav2array[8]}
-              title2Id={nav2array[11]}
-              list1Info={homeList[8].article_list}
-              list2Info={homeList[11].article_list}
+              title1={'法律维权'}
+              title2={'行业专家'}
+              title1Id={((homeList.filter(item => item.catalog_name === '法律维权'))[0] || {}).catalog_id}
+              title2Id={((homeList.filter(item => item.catalog_name === '行业专家'))[0] || {}).catalog_id}
+              list1Info={((homeList.filter(item => item.catalog_name === '法律维权'))[0] || {}).article_list || []}
+              list2Info={((homeList.filter(item => item.catalog_name === '行业专家'))[0] || {}).article_list || []}
               showNum={7}/>
-          ) : (
-            <div className='app-home-middle-none'>
-              <div className='app-home-middle-none-title'/>
-              <div className='app-home-middle-none-content'>
-                暂无数据
-              </div>
-            </div>
           )}
 
           <div className='app-home-middle2-c'>

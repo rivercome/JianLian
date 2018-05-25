@@ -18,3 +18,9 @@ export function surveyArticleIdsStore (articleId) {
     payload: articleId
   }
 }
+export function SearchAticle (article) {
+  return {
+    type: 'SEARCH_SURVEY',
+    payload: article
+  }
+}

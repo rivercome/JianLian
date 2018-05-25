@@ -29,6 +29,7 @@ class HomeMiddleContainer extends Component {
     } else {
       listInfo = this.props.list2Info
     }
+    console.log(listInfo)
     return (
       <div className='app-home-middle-container'>
         <HomeMiddleTitle

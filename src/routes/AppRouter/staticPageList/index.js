@@ -32,7 +32,7 @@ class StaticPageList extends Component {
       method: 'get'
     })
     await this.setState({
-      articleList: datas.list.data
+      articleList: (datas.list || {data: []}).data
     })
     return datas
   }

@@ -9,7 +9,8 @@ const API = {
   getHomeList: apiMaker('/article/list/all'),
   getArticle: apiMaker('/article/'),
   getCatalogArticle: apiMaker('/article/list/'),
-  getPictures: apiMaker('/pictures/lun/show')
+  getPictures: apiMaker('/pictures/lun/show'),
+  getSearch: apiMaker('/article/search/{title}')
 }
 
 export default API

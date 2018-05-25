@@ -7,30 +7,11 @@ import { Link } from 'react-router-dom'
 import './index.less'
 import AutoCarousel from '../Common/AutoCarousel'
 import NavBar from '../../components/Common/NavBar'
-import { catalogStore, pictureStore, surveyArticleIdsStore } from '../../actions'
+import { catalogStore, pictureStore, surveyArticleIdsStore, SearchAticle } from '../../actions'
 import API from '../../api/index'
 import fetchPost from '../../utils/request'
 
 class AppLayout extends Component {
-  constructor () {
-    super()
-    this.state = {
-      searchContent: '',
-      // timeNow: -5,
-      /* activeIndex: 0, */
-      images: [],
-      catalog: []
-    }
-    this.handleSearchChange = this.handleSearchChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.asyncGetCatalogArticle = this.asyncGetCatalogArticle.bind(this)
-  }
-
-  componentWillMount () {
-    this.asyncGetNavDatas()
-    this.asyncGetPictures()
-  }
-
   asyncGetNavDatas = async function () {
     const datas = await fetchPost({
       url: API.getHomeNav,
@@ -44,7 +25,6 @@ class AppLayout extends Component {
       this.asyncGetCatalogArticle(nav2.id)
     })
   }
-
   asyncGetPictures = async function () {
     const datas = await fetchPost({
       url: API.getPictures,
@@ -56,11 +36,36 @@ class AppLayout extends Component {
     this.props.dispatch(pictureStore(datas.pictures))
   }
   asyncGetCatalogArticle = async function (linkId) {
-    const datas = await fetchPost({
+    const data = await fetchPost({
       url: API.getCatalogArticle + linkId,
       method: 'get'
     })
-    // this.props.dispatch(surveyArticleIdsStore(datas.list.data[0].article_id))
+    console.log(data)
+    if (data.list) {
+      this.props.dispatch(surveyArticleIdsStore(data.list.data[0].article_id))
+    } else {
+      this.props.dispatch(surveyArticleIdsStore(linkId))
+    }
+  }
+
+  constructor () {
+    super()
+    this.state = {
+      searchContent: 'aa',
+      // timeNow: -5,
+      /* activeIndex: 0, */
+      article_id: '',
+      images: [],
+      catalog: []
+    }
+    this.handleSearchChange = this.handleSearchChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.asyncGetCatalogArticle = this.asyncGetCatalogArticle.bind(this)
+  }
+
+  componentWillMount () {
+    this.asyncGetNavDatas()
+    this.asyncGetPictures()
   }
 
   handleSearchChange (e) {
@@ -70,14 +75,30 @@ class AppLayout extends Component {
   }
 
   handleSubmit () {
+    const title = this.state.searchContent
+    fetch(`http://build.sealbaby.cn/article/search/${title}`)
+      .then(res => {
+        return res.json()
+      }).then(json => {
+      const data = json.data.data.map((item, index) => {
+        return {
+          article_id :item.article_id,
+          article_title: item.article_title
+        }
+      })
+      this.props.dispatch(SearchAticle(data))
+
+    })
+
     this.setState({
       searchContent: ''
     })
+    console.log(this.props)
   }
 
   render () {
     const catalog = this.state.catalog
-    const {picture, surveyArticleIds} = this.props
+    const {picture, surveyArticleIds, article_id} = this.props
     return (
       <div className='app'>
         <div className='app-header'>
@@ -104,17 +125,17 @@ class AppLayout extends Component {
           </div>
           <div className='app-header-nav'>
             <div className='app-header-nav-list'>
-              <NavBar navDatas={catalog} surveyId={surveyArticleIds}/>
+              <NavBar navDatas={catalog} surveyId={surveyArticleIds} />
             </div>
             <div className='app-header-nav-search'>
               <input className='app-header-nav-search-input'
                      type='text'
                      onChange={this.handleSearchChange}
-                     value={this.state.searchContent}/>
+                      />
               <div className='app-header-nav-search-font'>
-                <a className='nav-font' onClick={this.handleSubmit}>
+                <Link to='/async' className='nav-font' onClick={this.handleSubmit}>
                   搜索
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -137,8 +158,8 @@ class AppLayout extends Component {
           <div className='app-footer-info'>
             <div className='app-footer-info-line1'>
               秦皇岛市市建筑业联合会版权所有&nbsp;&nbsp;&nbsp;
-              xxxxxxxxxxxxxxxxx号&nbsp;&nbsp;&nbsp;
-              联系电话：(0335)7675616&nbsp;&nbsp;&nbsp;传真：（xxx）xxxxxxxx
+              冀ICP备18012990号&nbsp;&nbsp;&nbsp;
+              联系电话：(0335)7675616&nbsp;&nbsp;&nbsp;
             </div>
             <div className='app-footer-info-line2'>
               邮箱：qhdsjzylhh@163.com&nbsp;&nbsp;&nbsp;
@@ -156,7 +177,8 @@ class AppLayout extends Component {
 const mapStateToProps = (state) => {
   return {
     picture: state.picture,
-    surveyArticleIds: state.surveyArticleIds
+    surveyArticleIds: state.surveyArticleIds,
+    article_id: state.article_id
   }
 }
 

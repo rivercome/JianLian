@@ -18,6 +18,7 @@ const AppRouter = () => {
       <Switch>
         <Route exact path='/' component={Home}/>
         <Route path='/home' component={Home}/>
+        <Route path='/async' component={AsyncDemo} />
         <Route path='/StaticPage/catalog/:id' component={StaticPageList}/>
         <Route path='/StaticPage/article/:id' component={StaticPageArticle}/>
       </Switch>

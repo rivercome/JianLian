@@ -157,7 +157,6 @@ class ArticleEdit extends React.Component {
   }
 
   async uploadFile (e) {
-    console.log(this.editorInstance.selectionCollapsed())
     if (this.editorInstance.selectionCollapsed()) {
       return message.error('请选中文本')
     }
