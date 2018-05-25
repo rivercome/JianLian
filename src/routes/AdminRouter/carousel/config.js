@@ -22,6 +22,18 @@ const title = [
   {
     id: 6,
     title: '轮播图6'
+  },{
+    id: 7,
+    title: '轮播图7'
+  },{
+    id: 8,
+    title: '轮播图8'
+  },{
+    id: 9,
+    title: '轮播图9'
+  },{
+    id: 10,
+    title: '轮播图10'
   }
 ]
 

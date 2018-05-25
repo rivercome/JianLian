@@ -10,6 +10,8 @@ import './index.less'
 import API from '../../../api/index'
 import fetchPost from '../../../utils/request'
 import { connect } from 'react-redux'
+import Picture from '../../../components/Common/Picture'
+import StaicPicture from '../../../components/Common/StaicPicture'
 
 class AppHomePage extends Component {
   constructor () {
@@ -159,17 +161,34 @@ class AppHomePage extends Component {
               <Link className='app-home-top-b-top-title-link' to='/staticPage'>网上申报</Link>
             </div>
             <div className='app-home-top-c-content'>
-              {images2.map((image, i) => {
-                return (
-                  <div key={i} className='app-home-top-c-content-img'><img src={image} alt=""/></div>
+              {
+                picture['8'] ? (
+                  <StaicPicture
+                    images1={picture['8']}
+                    images2={picture['9']}
+                    images3={picture['10']} />
+                ) : (
+                  ''
                 )
-              })}
+              }
+              {/*{images2.map((image, i) => {*/}
+                {/*return (*/}
+                  {/*<div key={i} className='app-home-top-c-content-img'>*/}
+                    {/*<img src={image} alt=""/></div>*/}
+                {/*)*/}
+              {/*})}*/}
             </div>
           </div>
         </div>
         <div className='app-home-middle1'>
           <div className='app-home-middle1-a'>
-            <img src='/images/test.jpg' alt=''/>
+            {
+              picture['6'] ? (
+                <Picture images={picture['7']} time={5000} />
+              ) : (
+                ''
+              )
+            }
           </div>
           <div className='app-home-middle1-b'>
             <div className='title-right'>
@@ -288,6 +307,7 @@ class AppHomePage extends Component {
               </div>
             </div>
           )}
+
           <div className='app-home-middle2-c'>
             <div className='title-right'>
               <Link className='app-home-top-b-top-title-link' to='/staticPage'>

@@ -12,16 +12,16 @@ class AdminHomePage extends Component {
         <div className='introduce-content-container'>
           <div className='introduce-content-container-top'>
             <div className='introduce-content-container-top-carousel'>
-              <Link to='/admin/carousel'>轮播图1</Link>
+              <Link to='/jzylhh/carousel'>轮播图1</Link>
             </div>
             <div className='introduce-content-container-top-navbar'>
-              <Link to='/admin/catalog' className='introduce-content-container-top-navbar-bar'>导航栏1</Link>
+              <Link to='/jzylhh/catalog' className='introduce-content-container-top-navbar-bar'>导航栏1</Link>
             </div>
           </div>
           <div className='introduce-content-container-main'>
             <div className='introduce-content-container-main-1'>
               <div className='introduce-content-container-main-1-carousel introduce-content-container-main-box'>
-                <Link to='/admin/carousel'>轮播图2</Link>
+                <Link to='/jzylhh/carousel'>轮播图2</Link>
               </div>
               <div className='introduce-content-container-main-1-article introduce-content-container-main-box'>
                 文章列表1
@@ -50,7 +50,7 @@ class AdminHomePage extends Component {
               </div>
             </div>
             <div className='introduce-content-container-main-4'>
-              <Link to='/admin/carousel'>轮播图3</Link>
+              <Link to='/jzylhh/carousel'>轮播图3</Link>
             </div>
             <div className='introduce-content-container-main-3'>
               <div className='introduce-content-container-main-3-article introduce-content-container-main-box'>
@@ -60,7 +60,7 @@ class AdminHomePage extends Component {
                 文章列表6
               </div>
               <div className='introduce-content-container-main-3-carousel introduce-content-container-main-box'>
-                <Link to='/admin/carousel'>轮播图4</Link>
+                <Link to='/jzylhh/carousel'>轮播图4</Link>
               </div>
             </div>
             <div className='introduce-content-container-main-footer'>

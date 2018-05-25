@@ -27,7 +27,7 @@ export default class ArticleView extends React.Component {
         render: (text, record) => {
           return (
             <span>
-              <a href={`/admin/article/edit?id=${text.key}&title=${text.title}&catalog=${text.classId}&type=edit&parentClassId=${querystring.parse(this.props.location.search).parentClassId}`}>编辑</a>
+              <a href={`/jzylhh/article/edit?id=${text.key}&title=${text.title}&catalog=${text.classId}&type=edit&parentClassId=${querystring.parse(this.props.location.search).parentClassId}`}>编辑</a>
               <Divider type='vertical' />
               <a onClick={this.removeArticle.bind(this, text.key)}>删除</a>
             </span>
@@ -111,7 +111,7 @@ export default class ArticleView extends React.Component {
           {`${query.parentClassName} / ${query.className}`}
         </Col>
         <Col span={12} style={{textAlign: 'right'}}>
-          <Button type='primary' size='small'><Link to={`/admin/article/edit/?catalog=${query.classId}&type=add&parentClassId=${query.parentClassId}`}>添加文章</Link></Button>
+          <Button type='primary' size='small'><Link to={`/jzylhh/article/edit/?catalog=${query.classId}&type=add&parentClassId=${query.parentClassId}`}>添加文章</Link></Button>
         </Col>
       </Row>
     )

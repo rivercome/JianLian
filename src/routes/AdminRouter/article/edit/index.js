@@ -19,7 +19,8 @@ class ArticleEdit extends React.Component {
       tokenData: {
         token: null
       },
-      articleData: {}
+      articleData: {},
+      fileLink: ''
     }
   }
 
@@ -155,6 +156,49 @@ class ArticleEdit extends React.Component {
     })
   }
 
+  async uploadFile (e) {
+    console.log(this.editorInstance.selectionCollapsed())
+    if (this.editorInstance.selectionCollapsed()) {
+      return message.error('请选中文本')
+    }
+    const file = e.target.files[0]
+    await this.getToken(qiniuConfig.ACCESS_KEY, qiniuConfig.SECRET_KEY, qiniuConfig.Bucket_Name)
+    const serverURL = QINIU_SERVER
+    const xhr = new XMLHttpRequest()
+    const fd = new FormData()
+    console.log(file)
+    fd.append('file', file)
+
+    const successFn = (response) => {
+      // 假设服务端直接返回文件上传后的地址
+      // 上传成功后调用param.success并传入上传后的文件地址
+      const fileLink = `http://${qiniuConfig.Uptoken_Url}/${JSON.parse(response.currentTarget.response).hash}`
+      this.setState({fileLink})
+      this.editorInstance.toggleSelectionLink(fileLink, '_blank')
+      console.log('成功', fileLink)
+    }
+
+    const progressFn = (event) => {
+      // 上传进度发生变化时调用param.progress
+      console.log(event.loaded / event.total * 100)
+    }
+
+    const errorFn = (response) => {
+      // 上传发生错误时调用param.error
+      message.error('上传失败')
+    }
+
+    xhr.upload.addEventListener('progress', progressFn, false)
+    xhr.addEventListener('load', successFn, false)
+    xhr.addEventListener('error', errorFn, false)
+    xhr.addEventListener('abort', errorFn, false)
+
+
+    fd.append('token', this.state.tokenData.token)
+    xhr.open('POST', serverURL, true)
+    xhr.send(fd)
+  }
+
   render () {
     const { getFieldDecorator } = this.props.form
     const editorProps = {
@@ -167,11 +211,32 @@ class ArticleEdit extends React.Component {
         video: true, // 开启视频插入功能
         audio: true, // 开启音频插入功能
         validateFn: null, // 指定本地校验函数，说明见下文
-        uploadFn: this.upload.bind(this) // 指定上传函数，说明见下文
-      }
+        uploadFn: this.upload.bind(this), // 指定上传函数，说明见下文
+        externalMedias: {
+          image: true,
+          audio: true,
+          video: true,
+          embed: true
+        }
+      },
+      extendControls: [
+        {
+          type: 'split'
+        },
+        {
+          type: 'button',
+          text: 'Hello',
+          html: "<span>a</span>",
+          hoverTitle: 'Hello World!',
+          className: 'preview-button',
+          onClick: () => {this.fileControl.click()}
+        }
+      ],
+      toggleSelectionLink: {}
     }
     return (
       <div className='article-edit'>
+        <input type="file" style={{display: 'none'}} onChange={this.uploadFile.bind(this)} ref={(file) => {this.fileControl = file}} />
         <Card>
           <Form layout='inline' onSubmit={this.handleSubmit.bind(this)} className='article-edit-form'>
             <FormItem
@@ -195,7 +260,7 @@ class ArticleEdit extends React.Component {
             </FormItem>
           </Form>
           <h2 className='article-edit-h2'>文章内容</h2>
-          <BraftEditor ref={instance => this.editorInstance = instance} {...editorProps} />
+          <BraftEditor extendAtomics={<div>a</div>} ref={instance => this.editorInstance = instance} {...editorProps} />
         </Card>
       </div>
     )

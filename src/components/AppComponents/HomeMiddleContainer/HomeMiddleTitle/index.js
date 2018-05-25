@@ -27,6 +27,8 @@ class HomeMiddleTitle extends Component {
 
   FocusM2 () {
     if (this.state.isFocus.title2) {
+      console.log(this.state.isFocus.title2)
+
       return 'app-home-middle-title-focus'
     } else {
       return 'app-home-middle-title-no-focus'
@@ -55,6 +57,7 @@ class HomeMiddleTitle extends Component {
 
   render () {
     const {title1, title2, title1Id, title2Id} = this.props
+    console.log('1',this.props)
     // const titleLink = '/staticPage/catalog/' + this.props.link
     return (
       <div className='app-home-middle-title-container'>
