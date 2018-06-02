@@ -157,7 +157,7 @@ class AppLayout extends Component {
           </div>
           <div className='app-footer-info'>
             <div className='app-footer-info-line1'>
-              秦皇岛市市建筑业联合会版权所有&nbsp;&nbsp;&nbsp;
+              秦皇岛市建筑业联合会版权所有&nbsp;&nbsp;&nbsp;
               冀ICP备18012990号&nbsp;&nbsp;&nbsp;
               联系电话：(0335)7675616&nbsp;&nbsp;&nbsp;
             </div>

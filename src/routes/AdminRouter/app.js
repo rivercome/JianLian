@@ -25,6 +25,10 @@ const AdminUserPage = asyncComponent({
   resolve: () => System.import('./user')
 })
 
+const AdminLink = asyncComponent({
+  resolve: () => System.import('./link')
+})
+
 axios.interceptors.request.use((config) => {
   config.headers['token'] = localStorage.getItem('token') || ''
   config.headers['tokenId'] = localStorage.getItem('id') || 0
@@ -122,6 +126,7 @@ class AdminRouter extends React.Component {
           <Route path='/jzylhh/article' component={AdminArticlePage} />
           <Route path='/jzylhh/catalog' component={AdminCatalogPage} />
           <Route path='/jzylhh/user' component={AdminUserPage} />
+          <Route path='/jzylhh/link' component={AdminLink} />
         </Switch>
         <Modal title='登录状态失效，请输入密码' okText={buttonText} maskClosable={false} visible={visible} onOk={this.handleSubmit.bind(this)} confirmLoading={confirmLoading} onCancel={this.handleCancle.bind(this)}>
           <Form layout='inline'>

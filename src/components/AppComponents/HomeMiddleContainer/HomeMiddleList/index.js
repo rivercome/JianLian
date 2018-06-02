@@ -7,7 +7,7 @@ class HomeMiddleList extends Component {
     const lists = this.props.listInfo
     const showNum = this.props.showNum - 1 || 6
     if (lists.length === 0) {
-      return (
+      (
         <div className='app-home-middle-list-none'>暂无数据</div>
       )
     }
@@ -21,7 +21,7 @@ class HomeMiddleList extends Component {
               <li className='app-home-middle-list' key={i}>
                 <Link to={'/staticPage/article/' + list.article_id} className='app-home-middle-list-link'>
                   <div className='app-home-middle-list-link-content'>
-                    {titleShow}...
+                    {titleShow}
                   </div>
                 </Link>
                 <div className='app-home-middle-list-time'>
@@ -34,7 +34,7 @@ class HomeMiddleList extends Component {
               <li className='app-home-middle-list' style={{border: 'none'}} key={i}>
                 <Link to={'/staticPage/article/' + list.article_id} className='app-home-middle-list-link'>
                   <div className='app-home-middle-list-link-content'>
-                    {titleShow}...
+                    {titleShow}
                   </div>
                 </Link>
                 <div className='app-home-middle-list-time'>

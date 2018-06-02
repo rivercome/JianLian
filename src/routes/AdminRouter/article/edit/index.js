@@ -225,7 +225,7 @@ class ArticleEdit extends React.Component {
         {
           type: 'button',
           text: 'Hello',
-          html: "<span>a</span>",
+          html: "<span>上传附件</span>",
           hoverTitle: 'Hello World!',
           className: 'preview-button',
           onClick: () => {this.fileControl.click()}

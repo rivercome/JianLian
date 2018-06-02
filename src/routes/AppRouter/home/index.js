@@ -96,18 +96,18 @@ class AppHomePage extends Component {
     console.log(nav2array, homeList, catalog)
     return (
       <div className='app-home'>
-        <div id='td-code-left' className='td-code'>
-          <div className='td-code-img'>
-            <img src='/images/tdCode.jpg' alt=""/>
-          </div>
-          <div className='td-code-font'>
-            微信公众号<br/>
-            欢迎关注
-          </div>
-        </div>
+        {/*<div id='td-code-left' className='td-code'>*/}
+          {/*<div className='td-code-img'>*/}
+            {/*<img src='/images/tdCode.jpg' alt=""/>*/}
+          {/*</div>*/}
+          {/*<div className='td-code-font'>*/}
+            {/*微信公众号<br/>*/}
+            {/*欢迎关注*/}
+          {/*</div>*/}
+        {/*</div>*/}
         <div id='td-code-right' className='td-code'>
           <div className='td-code-img'>
-            <img src='/images/tdCode.jpg' alt=""/>
+            <img src='/images/tdCode.jpg'  width='80%' alt=""/>
           </div>
           <div className='td-code-font'>
             微信公众号<br/>
@@ -276,9 +276,8 @@ class AppHomePage extends Component {
         <div className='app-home-middle2'>
           {homeList[5] ? (
             <HomeMiddleContainer
-              title1={''}
-              title2={''}
-              /* 此处所传值有问题*/
+              title1={homeList[5].catalog_name}
+              title2={homeList[7].catalog_name}
               title1Id={nav2array[5]}
               title2Id={nav2array[7]}
               list1Info={homeList[5].article_list}

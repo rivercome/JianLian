@@ -1,11 +1,7 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
-
 import AppLayout from '../../components/AppLayout/index'
-import NotFound from '../404'
-
 import Home from './home/index'
-// async component
 import AsyncComponent from '../../components/AsyncComponent/index'
 import StaticPageList from './staticPageList/index'
 import StaticPageArticle from './staticPageArticle/index'
