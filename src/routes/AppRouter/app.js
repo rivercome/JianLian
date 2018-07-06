@@ -19,6 +19,7 @@ const AppRouter = () => {
         <Route path='/StaticPage/article/:id' component={StaticPageArticle}/>
       </Switch>
     </AppLayout>
+    
   )
 }
 
