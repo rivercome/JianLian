@@ -90,9 +90,9 @@ class StaticPageArticle extends Component {
               })}
             </div>
           </div>
-          <div className='static-article-nav-bottom'>
-            <img src='/images/test13.jpg' alt=""/>
-          </div>
+          {/*<div className='static-article-nav-bottom'>*/}
+            {/*<img src='/images/test13.jpg' alt=""/>*/}
+          {/*</div>*/}
         </div>
         <div className='static-article-content'>
           <div className='static-article-content-title'>

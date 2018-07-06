@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const QiniuPlugin = require('qiniu-webpack-plugin')
-const config = require('./secret')
+// const config = require('./secret')
 module.exports = function (webpackConfig, env) {
   if (env !== 'production') {} else {
     webpackConfig.plugins.push(

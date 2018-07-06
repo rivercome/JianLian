@@ -79,9 +79,9 @@ class StaticPageList extends Component {
               })}
             </div>
           </div>
-          <div className='static-nav-bottom'>
-            <img src='/images/test13.jpg' alt=""/>
-          </div>
+          {/*<div className='static-nav-bottom'>*/}
+            {/*<img src='/images/test13.jpg' alt=""/>*/}
+          {/*</div>*/}
         </div>
         <div className='static-content'>
           <div className='static-content-title'>
