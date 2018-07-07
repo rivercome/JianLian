@@ -40,8 +40,9 @@ class AppLayout extends Component {
       url: API.getCatalogArticle + linkId,
       method: 'get'
     })
-    console.log(data)
+    // console.log(data)
     if (data.list) {
+
       this.props.dispatch(surveyArticleIdsStore(data.list.data[0].article_id))
     } else {
       this.props.dispatch(surveyArticleIdsStore(linkId))
@@ -66,6 +67,7 @@ class AppLayout extends Component {
   componentWillMount () {
     this.asyncGetNavDatas()
     this.asyncGetPictures()
+
   }
 
   handleSearchChange (e) {
@@ -93,12 +95,23 @@ class AppLayout extends Component {
     this.setState({
       searchContent: ''
     })
-    console.log(this.props)
+    // console.log(this.props)
   }
 
   render () {
     const catalog = this.state.catalog
     const {picture, surveyArticleIds, article_id} = this.props
+    const lunbo = picture['1'].map((item, index) => {
+      return (
+        <div className='swiper-container'>
+          <div className='swiper-wrapper'>
+            <div className='swiper-slide'>
+              <img src={item.picture_url} />
+            </div>
+          </div>
+        </div>
+      )
+    })
     return (
       <div className='app'>
         <div className='app-header'>
