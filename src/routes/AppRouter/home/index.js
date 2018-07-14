@@ -38,7 +38,6 @@ class AppHomePage extends Component {
   }
 
   render () {
-    const images2 = ['/images/test11.jpg', '/images/test12.jpg', '/images/test13.jpg']
     const images11 = [
       {'1':'/images/CarouselTest/1.jpeg'},
       {'2':'/images/CarouselTest/2.jpg'},
@@ -93,7 +92,7 @@ class AppHomePage extends Component {
         images1 = images11.concat(picture3_copy)
       }
     }
-    // console.log(nav2array, homeList, catalog)
+    console.log('nav2array', nav2array,'homeList', homeList,'catalog', catalog)
     return (
       <div className='app-home'>
         {/*<div id='td-code-left' className='td-code'>*/}
@@ -193,14 +192,14 @@ class AppHomePage extends Component {
           </div>
           <div className='app-home-middle1-b'>
             <div className='title-right'>
-              <Link className='app-home-top-b-top-title-link' to='/staticPage'>会员资讯</Link>
+              <Link className='app-home-top-b-top-title-link' to='#'>会员资讯</Link>
             </div>
             <div className='app-home-middle1-b-content'>
               <div className='app-home-middle1-b-content-font'>
-                <Link to='#' style={{textDecoration: 'none'}}><Icon type='right-circle'/>&nbsp;会员单位</Link>
+                <Link to={'/staticPage/article/145'} style={{textDecoration: 'none'}}><Icon type='right-circle'/>&nbsp;会员单位</Link>
               </div>
               <div className='app-home-middle1-b-content-font'>
-                <Link to='#' style={{textDecoration: 'none'}}><Icon type='right-circle'/>&nbsp;入会须知</Link>
+                <Link to={'/staticPage/article/144'} style={{textDecoration: 'none'}}><Icon type='right-circle'/>&nbsp;入会须知</Link>
               </div>
             </div>
           </div>
@@ -243,14 +242,14 @@ class AppHomePage extends Component {
           <div className='app-home-middle2-c'>
             <div className='title-right'>
               {homeList[6] ? (
-                <Link className='app-home-top-b-top-title-link' to={'/staticPage/' + homeList[5].catalog_id}>
+                <Link className='app-home-top-b-top-title-link' to='#'>
                   {/*{homeList[5].catalog_name}*/}
                   材料信息
                 </Link>
               ) : ('暂无数据')}
             </div>
             {homeList[12] ? (
-              <HomeMiddleList listInfo={homeList[5].article_list} showNum={8}/>
+              <HomeMiddleList listInfo={homeList[12].article_list} showNum={8}/>
             ) : (
               <div className='app-home-middle-none-content'>
                 暂无数据
@@ -316,9 +315,10 @@ class AppHomePage extends Component {
                   ''
                 )
               }
-              <div className='app-home-middle2-c-content-list'>
-                <HomeMiddleList showNum={2} listInfo={lists}/>
-              </div>
+              {/*暂时放弃该文章列表*/}
+              {/*<div className='app-home-middle2-c-content-list'>*/}
+                {/*<HomeMiddleList showNum={2} listInfo={lists}/>*/}
+              {/*</div>*/}
             </div>
           </div>
         </div>
