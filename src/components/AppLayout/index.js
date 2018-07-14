@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import './index.less'
+import { Carousel } from 'antd';
 import AutoCarousel from '../Common/AutoCarousel'
 import NavBar from '../../components/Common/NavBar'
 import { catalogStore, pictureStore, surveyArticleIdsStore, SearchAticle } from '../../actions'
@@ -86,16 +87,15 @@ class AppLayout extends Component {
       this.props.dispatch(SearchAticle(data))
 
     })
-
     this.setState({
       searchContent: ''
     })
-    console.log(this.props)
   }
 
   render () {
     const catalog = this.state.catalog
     const {picture, surveyArticleIds, article_id} = this.props
+    console.log('picture', picture['1'])
     return (
       <div className='app'>
         <div className='app-header'>
@@ -103,7 +103,17 @@ class AppLayout extends Component {
             {/* <div className={this.position()} /> */}
             {
               picture['1'] ? (
-                <AutoCarousel images={picture['1']} time={5000} />
+                <Carousel autoplay>
+                  {
+                  picture['1'].map((item, index) => {
+                   return(
+                     <div>
+                      <img src={item.picture_url} height='100%'/>
+                     </div>
+                    )
+                  })
+                  }
+                </Carousel>
               ) : (
                 ''
               )
