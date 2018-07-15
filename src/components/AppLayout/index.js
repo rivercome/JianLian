@@ -103,17 +103,7 @@ class AppLayout extends Component {
             {/* <div className={this.position()} /> */}
             {
               picture['1'] ? (
-                <Carousel autoplay>
-                  {
-                  picture['1'].map((item, index) => {
-                   return(
-                     <div>
-                      <img src={item.picture_url} height='100%'/>
-                     </div>
-                    )
-                  })
-                  }
-                </Carousel>
+                <AutoCarousel images={picture['1']} time={5000} />
               ) : (
                 ''
               )

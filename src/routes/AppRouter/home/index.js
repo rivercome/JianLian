@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon } from 'antd'
+import { Icon, Carousel } from 'antd'
 import { Link } from 'react-router-dom'
 import AutoCarousel from '../../../components/Common/AutoCarousel'
 import NoneAutoCarousel from '../../../components/AppComponents/NoneAutoCarousel/index'
@@ -92,7 +92,9 @@ class AppHomePage extends Component {
         images1 = images11.concat(picture3_copy)
       }
     }
-    console.log('nav2array', nav2array,'homeList', homeList,'catalog', catalog)
+    console.log('nav2array', nav2array,'catalog', catalog)
+    console.log('homeList', homeList)
+    console.log('新型材料', homeList[1])
     return (
       <div className='app-home'>
         {/*<div id='td-code-left' className='td-code'>*/}
@@ -115,9 +117,26 @@ class AppHomePage extends Component {
         </div>
         <div className='app-home-top'>
           <div className='app-home-top-a'>
+            {/*{*/}
+              {/*picture['2'] ? (*/}
+                {/*<AutoCarousel images={picture['2']} time={5000}/>*/}
+              {/*) : (*/}
+                {/*''*/}
+              {/*)*/}
+            {/*}*/}
             {
               picture['2'] ? (
-                <AutoCarousel images={picture['2']} time={5000}/>
+                <Carousel autoplay>
+                  {
+                    picture['2'].map((item, index) => {
+                      return(
+                        <div>
+                          <img src={item.picture_url} height='100%'/>
+                        </div>
+                      )
+                    })
+                  }
+                </Carousel>
               ) : (
                 ''
               )
@@ -199,7 +218,7 @@ class AppHomePage extends Component {
                 <Link to={'/staticPage/article/145'} style={{textDecoration: 'none'}}><Icon type='right-circle'/>&nbsp;会员单位</Link>
               </div>
               <div className='app-home-middle1-b-content-font'>
-                <Link to={'/staticPage/article/144'} style={{textDecoration: 'none'}}><Icon type='right-circle'/>&nbsp;入会须知</Link>
+                <Link to={'/staticPage/article/148'} style={{textDecoration: 'none'}}><Icon type='right-circle'/>&nbsp;入会须知</Link>
               </div>
             </div>
           </div>
@@ -315,10 +334,13 @@ class AppHomePage extends Component {
                   ''
                 )
               }
-              {/*暂时放弃该文章列表*/}
-              {/*<div className='app-home-middle2-c-content-list'>*/}
-                {/*<HomeMiddleList showNum={2} listInfo={lists}/>*/}
-              {/*</div>*/}
+              {homeList[13] ? (
+                <HomeMiddleList listInfo={homeList[13].article_list} showNum={8}/>
+              ) : (
+                <div className='app-home-middle-none-content'>
+                  暂无数据
+                </div>
+              )}
             </div>
           </div>
         </div>
