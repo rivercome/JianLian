@@ -10,7 +10,8 @@ const API = {
   getArticle: apiMaker('/article/'),
   getCatalogArticle: apiMaker('/article/list/'),
   getPictures: apiMaker('/pictures/lun/show'),
-  getSearch: apiMaker('/article/search/{title}')
+  getSearch: apiMaker('/article/search/{title}'),
+  getLink: apiMaker('/friendurl/show')
 }
 
 export default API

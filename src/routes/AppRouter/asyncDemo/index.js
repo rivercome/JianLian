@@ -11,15 +11,9 @@ class AsyncDemo extends Component {
     }
   }
 
-  componentDidMount () {
-    console.log(this.props)
-  }
-
   render () {
     const {article_id, article_title} = this.props
     const title = this.props.article_title
-    console.log(title)
-
     return (
       <div>
         <div className='SerachList'>

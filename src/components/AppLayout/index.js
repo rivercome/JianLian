@@ -38,12 +38,24 @@ class AppLayout extends Component {
       url: API.getCatalogArticle + linkId,
       method: 'get'
     })
-    console.log(data)
     if (data.list) {
       this.props.dispatch(surveyArticleIdsStore(data.list.data[0].article_id))
     } else {
       this.props.dispatch(surveyArticleIdsStore(linkId))
     }
+  }
+  asyncgetLink = async () => {
+     await fetchPost({
+      url: API.getLink,
+      method: 'get'
+    }).then(
+      res => {
+        console.log('res', res)
+        if (res.code === 1000){
+          this.setState({link: res.data})
+        }
+      }
+     )
   }
 
   constructor () {
@@ -54,16 +66,19 @@ class AppLayout extends Component {
       /* activeIndex: 0, */
       article_id: '',
       images: [],
-      catalog: []
+      catalog: [],
+      link: [],
     }
     this.handleSearchChange = this.handleSearchChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.asyncGetCatalogArticle = this.asyncGetCatalogArticle.bind(this)
+    this.asyncgetLink = this.asyncgetLink.bind(this)
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.asyncGetNavDatas()
     this.asyncGetPictures()
+    this.asyncgetLink()
   }
 
   handleSearchChange (e) {
@@ -95,7 +110,6 @@ class AppLayout extends Component {
   render () {
     const catalog = this.state.catalog
     const {picture, surveyArticleIds, article_id} = this.props
-    console.log('picture', picture['1'])
     return (
       <div className='app'>
         <div className='app-header'>
@@ -144,12 +158,23 @@ class AppLayout extends Component {
           <div className='app-footer-link'>
             <div className='app-footer-link-title'>友情链接:</div>
             <ul className='app-footer-link-list'>
-              <li><a href='#'>秦皇岛市市住建委</a></li>
-              <li><a href='#'>中国建筑协会</a></li>
-              <li><a href='#'>中国施工企业管理协会</a></li>
-              <li><a href='#'>中国土木工程学会</a></li>
-              <li><a href='#'>秦皇岛市社团办</a></li>
-              <li><a href='#'>秦皇岛市社会工委</a></li>
+              {
+                this.state.link ?
+                  (this.state.link).map((item,index) => {
+                    return (
+                      <li><a href={item.url} key={index}>{item.title}</a></li>
+                    )
+                  })
+                  : (
+                    ''
+                  )
+              }
+              {/*<li><a href='#'>秦皇岛市市住建委</a></li>*/}
+              {/*<li><a href='#'>中国建筑协会</a></li>*/}
+              {/*<li><a href='#'>中国施工企业管理协会</a></li>*/}
+              {/*<li><a href='#'>中国土木工程学会</a></li>*/}
+              {/*<li><a href='#'>秦皇岛市社团办</a></li>*/}
+              {/*<li><a href='#'>秦皇岛市社会工委</a></li>*/}
             </ul>
           </div>
           <div className='app-footer-info'>

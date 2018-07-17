@@ -92,9 +92,9 @@ class AppHomePage extends Component {
         images1 = images11.concat(picture3_copy)
       }
     }
-    console.log('nav2array', nav2array,'catalog', catalog)
-    console.log('homeList', homeList)
-    console.log('新型材料', homeList[1])
+    // console.log('nav2array', nav2array,'catalog', catalog)
+    // console.log('homeList', homeList)
+    // console.log('新型材料', homeList[1])
     return (
       <div className='app-home'>
         {/*<div id='td-code-left' className='td-code'>*/}
