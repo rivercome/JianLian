@@ -50,7 +50,6 @@ class AppLayout extends Component {
       method: 'get'
     }).then(
       res => {
-        console.log('res', res)
         if (res.code === 1000){
           this.setState({link: res.data})
         }
@@ -73,6 +72,7 @@ class AppLayout extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.asyncGetCatalogArticle = this.asyncGetCatalogArticle.bind(this)
     this.asyncgetLink = this.asyncgetLink.bind(this)
+    this.sortByproperty = this.sortByproperty.bind(this)
   }
 
   componentDidMount () {
@@ -81,6 +81,20 @@ class AppLayout extends Component {
     this.asyncgetLink()
   }
 
+  sortByproperty = (a, b) => {
+    return a.position-b.position
+    // const sortFun = function (obj1, obj2) {
+    //   if(obj1[properyName] > obj2[properyName]){
+    //     return 1;
+    //   }else if (obj1[properyName] == obj2[properyName]){
+    //     return 0;
+    //   }else {
+    //     return -1;
+    //   }
+    // }
+    // //这里注意返回是函数
+    // return sortFun
+  }
   handleSearchChange (e) {
     this.setState({
       searchContent: e.target.value
@@ -110,6 +124,7 @@ class AppLayout extends Component {
   render () {
     const catalog = this.state.catalog
     const {picture, surveyArticleIds, article_id} = this.props
+
     return (
       <div className='app'>
         <div className='app-header'>
@@ -160,10 +175,10 @@ class AppLayout extends Component {
             <ul className='app-footer-link-list'>
               {
                 this.state.link ?
-                  (this.state.link).map((item,index) => {
-                    return (
-                      <li><a href={item.url} key={index}>{item.title}</a></li>
-                    )
+                  this.state.link.sort(this.sortByproperty.bind(this)).map((item,index) => {
+                  return (
+                    <li><a href={item.url} key={index}>{item.title}</a></li>
+                  )
                   })
                   : (
                     ''

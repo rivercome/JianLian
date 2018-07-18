@@ -69,7 +69,7 @@ class AdminLink extends Component {
         </div>
         <div className='link-content'>
           <div className='each-content'>
-            <Input addonBefore="友情链接" defaultValue="输入链接名" width='70%' className='link-input'
+            <Input addonBefore="链接名称" defaultValue="输入链接名" width='70%' className='link-input'
                    onChange={(e) => this.handleChange1(e)}
             />
             <br />
