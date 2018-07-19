@@ -34,7 +34,7 @@ class NoneAutoCarousel extends React.Component {
 
   render () {
     return (
-      <div>
+      <div style={{overflow: 'hidden'}}>
         <div className='none-auto-carousel-arrow'>
           <Icon type='left' onClick={this.preCarousel} style={{fontSize: '25px'}}/>
         </div>

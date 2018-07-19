@@ -55,6 +55,8 @@ class HomeMiddleTitle extends Component {
 
   render () {
     const {title1, title2, title1Id, title2Id} = this.props
+    console.log('title1Id', title1Id)
+    console.log('title2Id', title2Id)
     // const titleLink = '/staticPage/catalog/' + this.props.link
     return (
       <div className='app-home-middle-title-container'>

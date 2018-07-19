@@ -93,7 +93,8 @@ class AppHomePage extends Component {
       }
     }
     // console.log('nav2array', nav2array,'catalog', catalog)
-    // console.log('homeList', homeList)
+    console.log('homeList', homeList)
+    console.log('nav2array', nav2array)
     // console.log('新型材料', homeList[1])
     return (
       <div className='app-home'>
@@ -259,9 +260,19 @@ class AppHomePage extends Component {
             </div>
           )}
           <div className='app-home-middle2-c'>
+            {/*<div className='app-home-top-b-top-title'>*/}
+              {/*{homeList[1] ? (*/}
+                {/*<Link*/}
+                  {/*className='app-home-top-b-top-title-link'*/}
+                  {/*to={'/staticPage/catalog/' + nav2array[1]}>*/}
+                  {/*{homeList[1].catalog_name}*/}
+                {/*</Link>*/}
+              {/*) : ('暂无数据')}*/}
+            {/*</div>*/}
             <div className='title-right'>
-              {homeList[6] ? (
-                <Link className='app-home-top-b-top-title-link' to='#'>
+              {homeList[12] ? (
+                <Link className='app-home-top-b-top-title-link'
+                      to={'/staticPage/catalog/' + nav2array[12]}>
                   {/*{homeList[5].catalog_name}*/}
                   材料信息
                 </Link>
@@ -313,8 +324,8 @@ class AppHomePage extends Component {
             <HomeMiddleContainer
               title1={'法律维权'}
               title2={'行业专家'}
-              title1Id={((homeList.filter(item => item.catalog_name === '法律维权'))[0] || {}).catalog_id}
-              title2Id={((homeList.filter(item => item.catalog_name === '行业专家'))[0] || {}).catalog_id}
+              title1Id={nav2array[8]}
+              title2Id={nav2array[10]}
               list1Info={((homeList.filter(item => item.catalog_name === '法律维权'))[0] || {}).article_list || []}
               list2Info={((homeList.filter(item => item.catalog_name === '行业专家'))[0] || {}).article_list || []}
               showNum={7}/>
@@ -322,9 +333,13 @@ class AppHomePage extends Component {
 
           <div className='app-home-middle2-c'>
             <div className='title-right'>
-              <Link className='app-home-top-b-top-title-link' to='/staticPage'>
-                新型材料及产品展示
-              </Link>
+              {homeList[13] ? (
+                <Link className='app-home-top-b-top-title-link'
+                      to={'/staticPage/catalog/' + nav2array[13]}>
+                  {/*{homeList[5].catalog_name}*/}
+                  新型材料及展品展示
+                </Link>
+              ) : ('暂无数据')}
             </div>
             <div className='app-home-middle2-c-content'>
               {
@@ -334,6 +349,7 @@ class AppHomePage extends Component {
                   ''
                 )
               }
+
               {homeList[13] ? (
                 <HomeMiddleList listInfo={homeList[13].article_list} showNum={8}/>
               ) : (
