@@ -216,10 +216,17 @@ class AppHomePage extends Component {
             </div>
             <div className='app-home-middle1-b-content'>
               <div className='app-home-middle1-b-content-font'>
-                <Link to={'/staticPage/article/145'} style={{textDecoration: 'none'}}><Icon type='right-circle'/>&nbsp;会员单位</Link>
+                {homeList[11]?(
+                  <Link
+                    style={{textDecoration: 'none'}}
+                    to={'/staticPage/catalog/' + nav2array[11]}>
+                    <Icon type='right-circle'/>&nbsp;入会须知
+                  </Link>
+                ): ''}
+                {/*<Link to={'/staticPage/article/145'} ></Link>*/}
               </div>
               <div className='app-home-middle1-b-content-font'>
-                <Link to={'/staticPage/article/148'} style={{textDecoration: 'none'}}><Icon type='right-circle'/>&nbsp;入会须知</Link>
+                <Link to={'/staticPage/article/145'} style={{textDecoration: 'none'}}><Icon type='right-circle'/>&nbsp;会员单位</Link>
               </div>
             </div>
           </div>
