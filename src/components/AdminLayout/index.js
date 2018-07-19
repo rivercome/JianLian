@@ -44,6 +44,10 @@ export default class AdminLayout extends React.Component {
           title: '友情链接',
           icon: 'icon-yonghu',
           link: '/jzylhh/link'
+        },{
+          title: '使用帮助',
+          icon: 'icon-yonghu',
+          link: '/jzylhh/help'
         }
       ]
     }
