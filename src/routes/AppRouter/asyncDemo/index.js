@@ -14,20 +14,20 @@ class AsyncDemo extends Component {
   render () {
     const {article_id, article_title} = this.props
     const title = this.props.article_title
+    console.log('title', title)
     return (
       <div>
         <div className='SerachList'>
           { title.map((item, index) => {
             return (
-              <a href='http://47.104.174.246/StaticPage/catalog/${item.article_id}'>
-              <div key='${index}'>
+              <a href={`http://47.104.174.246/StaticPage/article/${item.article_id}`}>
+              <div key={`${index}-index`}>
                 {item.article_title}
+                2
               </div>
                 <br />
               </a>
-
             )
-
           })}
           {/*<hr />*/}
         </div>
