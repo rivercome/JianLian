@@ -50,11 +50,12 @@ class ArticleEdit extends React.Component {
     this.setState({html})
   }
 
-  getToken (accessKey, secretKey, bucket) {
+  getToken (accessKey, secretKey, bucket, fileName) {
     return axios.post(`${basePath}/upload`, {
       accessKey,
       secretKey,
-      bucket
+      bucket,
+      fileName
     }).then(res => {
       this.setState({tokenData: res.data})
     })
@@ -161,12 +162,10 @@ class ArticleEdit extends React.Component {
       return message.error('请选中文本')
     }
     const file = e.target.files[0]
-    await this.getToken(qiniuConfig.ACCESS_KEY, qiniuConfig.SECRET_KEY, qiniuConfig.Bucket_Name)
+    await this.getToken(qiniuConfig.ACCESS_KEY, qiniuConfig.SECRET_KEY, qiniuConfig.Bucket_Name, file.name)
     const serverURL = QINIU_SERVER
     const xhr = new XMLHttpRequest()
     const fd = new FormData()
-    console.log(file)
-    fd.append('file', file)
 
     const successFn = (response) => {
       // 假设服务端直接返回文件上传后的地址
