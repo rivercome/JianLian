@@ -166,7 +166,7 @@ class ArticleEdit extends React.Component {
     const serverURL = QINIU_SERVER
     const xhr = new XMLHttpRequest()
     const fd = new FormData()
-
+    fd.append('file', file)
     const successFn = (response) => {
       // 假设服务端直接返回文件上传后的地址
       // 上传成功后调用param.success并传入上传后的文件地址
@@ -195,6 +195,7 @@ class ArticleEdit extends React.Component {
     fd.append('token', this.state.tokenData.token)
     xhr.open('POST', serverURL, true)
     xhr.send(fd)
+    fd.append('file', file)
   }
 
   render () {
