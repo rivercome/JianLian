@@ -170,7 +170,10 @@ class ArticleEdit extends React.Component {
     const successFn = (response) => {
       // 假设服务端直接返回文件上传后的地址
       // 上传成功后调用param.success并传入上传后的文件地址
-      const fileLink = `http://${qiniuConfig.Uptoken_Url}/${JSON.parse(response.currentTarget.response).hash}`
+      // const fileLink = `http://${qiniuConfig.Uptoken_Url}/${JSON.parse(response.currentTarget.response).hash}`
+      console.log('response', response)
+      console.log('response.currentTarget', response.currentTarget)
+      const fileLink = `http://${qiniuConfig.Uptoken_Url}/${JSON.parse(response.currentTarget.response).key}`
       this.setState({fileLink})
       this.editorInstance.toggleSelectionLink(fileLink, '_blank')
       console.log('成功', fileLink)
